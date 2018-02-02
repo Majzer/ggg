@@ -24,13 +24,10 @@ import com.csanysoft.donto.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class MenuStage extends MyStage {
 
     TextButton btnStart , btnExit;
-
+    OneSpriteStaticActor bg;
 
     public MenuStage(Viewport viewport, Batch batch, Donto game) {
         super(viewport, batch, game);
-
-
-
 
     }
 
@@ -65,6 +62,8 @@ public class MenuStage extends MyStage {
         btnStart.setPosition(getViewport().getScreenWidth()/2-100, getViewport().getWorldHeight()/2);
         btnExit.setPosition(btnStart.getX() , btnStart.getY()-btnExit.getHeight()-50);
 
+        btnStart.setZIndex(2);
+        btnExit.setZIndex(3);
     }
 
     @Override

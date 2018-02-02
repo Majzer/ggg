@@ -70,9 +70,8 @@ public class GameStage extends MyStage {
         sound.setLooping(true);
 
 
+        /*
         btnOn = new MyButton("", game.btnOn());
-
-
         btnOn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -80,7 +79,7 @@ public class GameStage extends MyStage {
             }
         });
         addActor(btnOn);
-
+        */
     setDebugAll(true);
     }
 
