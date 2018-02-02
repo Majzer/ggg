@@ -84,6 +84,7 @@ public class GameStage extends MyStage {
             for (Actor a : deleteActor) {
                 actors.removeValue(a, true);
             }
+            setCameraMoveToXY(androidActor.getX(), androidActor.getY());
         }
     }
 }
