@@ -31,6 +31,7 @@ public class GameStage extends MyStage {
     ArrayList<PlatformActor> platforms = new ArrayList<PlatformActor>();
     PlatformActor platformActor;
     AndroidActor androidActor;
+    FanActor fanActor;
     Random rand = new Random();
     OneSpriteStaticActor bg;
     TextButton btnOn;
@@ -51,11 +52,13 @@ public class GameStage extends MyStage {
 
         // TODO: 2018. 02. 02. Ez piros volt valamiért
         sound = Assets.manager.get(Assets.ThemeSound);
-        fan = Assets.manager.get(Assets.FanSound);
+
 
         addActor(platformActor=new PlatformActor(i++,100));
+        addActor(fanActor = new FanActor());
+        fanActor.setY(-400);
         platforms.add(platformActor);
-        addActor(androidActor=new AndroidActor(Assets.manager.get(Assets.WALK_TEXTURE)));
+        addActor(androidActor=new AndroidActor());
         androidActor.setPosition(platformActor.getX(),platformActor.getY()+platformActor.getHeight()+20);
         platformActor.setZIndex(3);
         for(;i < 11; i++) {
@@ -103,6 +106,8 @@ public class GameStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
 
+        fanActor.setX(androidActor.getX());
+
         if(androidActor!=null){
         if(elapsedTime-elapsedTimeForAndroidActor>10){
             androidActor.setFps(androidActor.getFps()+1);
@@ -114,12 +119,10 @@ public class GameStage extends MyStage {
             androidActor.setSpeedX(baseSpeed);
             if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isTouched()){
                 androidActor.up();
-                fan.play();
-                fan.setLooping(true);
-                fan.setVolume(0.5f);
+                fanActor.turnOn();
             } else if(!onPlatform){
                 androidActor.down();
-                fan.pause();
+                fanActor.turnOff();
             }
             else androidActor.land();
 
