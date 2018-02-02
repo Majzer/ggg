@@ -37,7 +37,6 @@ public class LoadingScreen extends MyScreen {
 	public void render(float delta) {
 		super.render(delta);
 		spriteBatch.begin();
-		bitmapFont.draw(spriteBatch,"Loading: " + Assets.manager.getLoadedAssets() + "/" + (Assets.manager.getQueuedAssets()+ Assets.manager.getLoadedAssets()) + " (" + ((int)(Assets.manager.getProgress()*100f)) + "%)", Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
 		spriteBatch.end();
 		if (Assets.manager.update()) {
 			Assets.afterLoaded();
@@ -55,6 +54,6 @@ public class LoadingScreen extends MyScreen {
 
 	@Override
 	public void init() {
-		setBackGroundColor(0f, 0f, 0f);
+		setBackGroundColor(1f, 1f, 1f);
 	}
 }

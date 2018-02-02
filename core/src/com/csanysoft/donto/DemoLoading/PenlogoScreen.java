@@ -24,6 +24,7 @@ public class PenlogoScreen extends MyScreen {
     @Override
     public void render(float delta) {
         super.render(delta);
+        setBackGroundColor(1,1,1);
         if(System.currentTimeMillis()-ido > 2500){
             game.setScreen(new MenuScreen(game));
         }

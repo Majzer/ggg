@@ -109,6 +109,9 @@ public class GameStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
+
+//        helpHand.setPosition(androidActor.getX(), androidActor.getY());
+        //helpHand.setSize(getWidth() + (float)Math.cos(elapsedTime*10)/40, getHeight() + (float)Math.sin(elapsedTime*10)/40);
         fanActor.setX(androidActor.getX());
         helpHand.setPosition(androidActor.getX()+androidActor.getWidth()/2-40, androidActor.getY()+androidActor.getHeight()/2-35);
 
@@ -154,16 +157,11 @@ public class GameStage extends MyStage {
                 if(androidActor.overlaps(ShapeType.Rectangle,pa)){
                     int aY = (int)androidActor.getY();
                     float paYH = pa.getY()+pa.getHeight();
-                    System.out.println("androidActor.getSpeedY() = " + androidActor.getSpeedY());
-                    System.out.println("(int)(androidActor.getX() + androidActor.getWidth()) = " + (int)(androidActor.getX() + androidActor.getWidth()));
-                    System.out.println("pa.getX() = " + pa.getX());
                     if((int)(androidActor.getX() + androidActor.getWidth()) > pa.getX()-50 && (int)(androidActor.getX() + androidActor.getWidth()) < pa.getX()+10){
-                        System.out.println("fejicjgirjticgr");
                         androidActor.setSpeedX(0);
                     }
                     
                     else if (aY+androidActor.getHeight() < pa.getY()+10){
-                        System.out.println("alulról");
                         androidActor.setY(pa.getY()-androidActor.getHeight());
                     }
                     else{

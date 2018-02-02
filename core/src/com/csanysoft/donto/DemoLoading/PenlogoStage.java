@@ -17,11 +17,9 @@ public class PenlogoStage extends MyStage {
 
     public PenlogoStage(Viewport viewport, Batch batch, Donto game) {
         super(viewport, batch, game);
-
         penlogo = new OneSpriteStaticActor(Assets.manager.get(Assets.PENLOGO_TEXTURE));
         addActor(penlogo);
         penlogo.setPosition(getViewport().getWorldWidth()/2-penlogo.getWidth()/2,getViewport().getWorldHeight()/2-penlogo.getHeight()/2);
-
         whiterect = new OneSpriteStaticActor(Assets.manager.get(Assets.WHITE_RECTANGLE_TEXTURE));
         addActor(whiterect);
         whiterect.setPosition(getViewport().getWorldWidth()/2-penlogo.getWidth()/2,getViewport().getWorldHeight()/2-penlogo.getHeight()/2);
@@ -32,11 +30,6 @@ public class PenlogoStage extends MyStage {
 
     }
 
-    @Override
-    public void act() {
-        super.act();
-        whiterect.setHeight(50*elapsedTime);
-    }
 
     @Override
     public void dispose() {
@@ -51,5 +44,6 @@ public class PenlogoStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
+        whiterect.setY(whiterect.getY()+elapsedTime*3);
     }
 }
