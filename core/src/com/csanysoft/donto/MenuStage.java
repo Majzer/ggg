@@ -25,9 +25,15 @@ public class MenuStage extends MyStage {
 
     TextButton btnStart , btnExit;
     OneSpriteStaticActor bg;
+    Music menu;
 
     public MenuStage(Viewport viewport, Batch batch, Donto game) {
         super(viewport, batch, game);
+        menu = Assets.manager.get(Assets.MenuTheme);
+
+        menu.play();
+        menu.setVolume(0.4f);
+        menu.setLooping(true);
 
     }
 

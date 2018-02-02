@@ -96,7 +96,7 @@ public class Assets {
 			=new AssetDescriptor<Music>("sound/wind_sound_2.0.wav", Music.class);
 
 	public static final AssetDescriptor<Music> FanSound
-			=new AssetDescriptor<Music>("sound/mune_theme_sound.wav", Music.class);
+			=new AssetDescriptor<Music>("sound/fan_sound.wav", Music.class);
 	//---------------------------------------------------------------------------------------------------------
 
 	public static void prepare() {
