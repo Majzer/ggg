@@ -17,7 +17,7 @@ public class FanActor extends OneSpriteAnimatedActor {
 
     public FanActor() {
         super(Assets.manager.get(Assets.BLOWER_TEXTURE));
-        fanMusic.setVolume(0.4f);
+        fanMusic.setVolume(0.6f);
         fanMusic.setLooping(false);
         setZIndex(5);
     }
@@ -25,6 +25,7 @@ public class FanActor extends OneSpriteAnimatedActor {
     @Override
     public void act(float delta) {
         super.act(delta);
+        fanMusic.pause();
         if(isRunning){
             //fut
             setFps(24);

@@ -96,7 +96,7 @@ public class GameStage extends MyStage {
         setDebugAll(true);
         theme.pause();
         sound.play();
-        sound.setVolume(0.4f);
+        sound.setVolume(0.2f);
         sound.setLooping(true);
 
 
