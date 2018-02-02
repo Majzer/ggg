@@ -41,9 +41,8 @@ public class GameStage extends MyStage {
         super(viewport, batch, game);
 
 
-        platformActor.setZIndex(3);
-        androidActor.setZIndex(2);
-        bg.setZIndex(1);
+
+
         sound = Assets.manager.get(Assets.ThemeSound);
 
         addActor(platformActor=new PlatformActor(i++,100));
@@ -61,24 +60,13 @@ public class GameStage extends MyStage {
         addActor(bg);
         bg.setZIndex(1);
         androidActor.setZIndex(2);
-
+        platformActor.setZIndex(3);
+        androidActor.setZIndex(2);
         sound.play();
         sound.setVolume(0.4f);
         sound.setLooping(true);
 
 
-        // TODO: 2018. 02. 02.  kommentet kitörölni
-        //btnOn = new MyButton("", game.btnOn());
-        /*
-
-        btnOn.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-            }
-        });
-        addActor(btnOn);
-        */
     setDebugAll(true);
     }
 
