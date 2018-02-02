@@ -54,11 +54,12 @@ public class GameStage extends MyStage {
 
 
         addActor(platformActor=new PlatformActor(i++,100));
-        addActor(fanActor = new FanActor());
-        fanActor.setY(-400);
-        platforms.add(platformActor);
         addActor(androidActor=new AndroidActor());
         androidActor.setPosition(platformActor.getX(),platformActor.getY()+platformActor.getHeight()+20);
+        addActor(fanActor = new FanActor());
+        fanActor.setY(androidActor.getY());
+        fanActor.setZIndex(5);
+        platforms.add(platformActor);
         platformActor.setZIndex(3);
         for(;i < 11; i++) {
             addActor(platformActor=new PlatformActor(i*1100 + rand.nextInt(500),rand.nextInt(500)+100));
@@ -112,7 +113,6 @@ public class GameStage extends MyStage {
 
 //        helpHand.setPosition(androidActor.getX(), androidActor.getY());
         //helpHand.setSize(getWidth() + (float)Math.cos(elapsedTime*10)/40, getHeight() + (float)Math.sin(elapsedTime*10)/40);
-        fanActor.setX(androidActor.getX());
         helpHand.setPosition(androidActor.getX()+androidActor.getWidth()/2-40, androidActor.getY()+androidActor.getHeight()/2-35);
 
         if(androidActor!=null){
@@ -122,7 +122,10 @@ public class GameStage extends MyStage {
             elapsedTimeForAndroidActor=elapsedTime;
         }
 
-
+            if(fanActor!=null){
+                fanActor.setY(androidActor.getY()-575);
+                fanActor.setX(androidActor.getX()-fanActor.getWidth()/2+androidActor.getWidth()/2);
+            }
             androidActor.setSpeedX(baseSpeed);
             if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isTouched()){
                 androidActor.up();
