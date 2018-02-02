@@ -87,6 +87,16 @@ public class GameStage extends MyStage {
             }
             setCameraMoveToXY(androidActor.getX(), androidActor.getY(), 1.5f);
         }
+
+
+        if(androidActor.getY() > 800) {
+            if(rand.nextBoolean()) {
+                androidActor.setPosition(rand.nextInt()+10, rand.nextInt()-10);
+            } else {
+                androidActor.setPosition(rand.nextInt()-10, rand.nextInt()+10);
+            }
+
+        }
     }
 }
 
