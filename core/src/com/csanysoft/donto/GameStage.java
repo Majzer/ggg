@@ -48,6 +48,8 @@ public class GameStage extends MyStage {
         }
 
         bg = new OneSpriteStaticActor(Assets.manager.get(Assets.BACKGROUND_TEXTURE));
+        bg.setSize(getViewport().getScreenWidth()*1.5f,getViewport().getScreenHeight()*1.5f);
+        bg.setPosition(0,0);
         addActor(bg);
         bg.setZIndex(1);
         androidActor.setZIndex(2);
@@ -82,20 +84,22 @@ public class GameStage extends MyStage {
         super.act(delta);
         if(androidActor!=null){
 
-            if(bg!=null) bg.setPosition(androidActor.getX()-200, androidActor.getY()-200);
+            if(bg!=null) bg.setPosition(getCameraMoveToX(), getCameraMoveToY());
 
             androidActor.setSpeedX(4);
             //TODO: Majd megcsinálom szebbé by ifa
             if(Gdx.input.isKeyPressed(Input.Keys.UP)){
                 androidActor.up();
-            } else if(!onPlatform) androidActor.down();
+            } else if(!onPlatform){
+                androidActor.down();
+            }
             else androidActor.land();
 
-            setCameraMoveToXY(androidActor.getX()+200, 400);
+            setCameraMoveToXY(androidActor.getX(), androidActor.getY(), 1.5f);
 
             Array<Actor> actors = getActors();
             ArrayList<Actor> deleteActor = new ArrayList<Actor>();
-
+            onPlatform=false;
             for(PlatformActor pa : platforms){
                 if(pa.getX()<androidActor.getX()-getViewport().getScreenWidth()*2) {
                     deleteActor.add(pa);
@@ -129,7 +133,6 @@ public class GameStage extends MyStage {
             for (Actor a : deleteActor) {
                 actors.removeValue(a, true);
             }
-            setCameraMoveToXY(androidActor.getX(), androidActor.getY(), 1.5f);
         }
 
 
