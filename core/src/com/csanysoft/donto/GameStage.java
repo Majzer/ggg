@@ -113,12 +113,12 @@ public class GameStage extends MyStage {
                 }
 
                 if(androidActor.overlaps(ShapeType.Rectangle,pa)){
-                    onPlatform = true;
                     System.out.println("Hozzáér");
                     float aY = androidActor.getY();
                     float paYH = pa.getY()+pa.getHeight();
                     System.out.println(aY >= paYH-10);
                     if(aY >= paYH-10 || aY >= paYH-11){
+                        onPlatform = true;
                         androidActor.setY(paYH);
                         System.out.println("teteje");
                     }
