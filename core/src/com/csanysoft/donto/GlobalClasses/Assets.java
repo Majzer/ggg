@@ -50,8 +50,13 @@ public class Assets {
 	public static final AssetDescriptor<TextureAtlas> WALK_TEXTURE
 			= new AssetDescriptor<TextureAtlas>("android/walk.atlas", TextureAtlas.class);
 
+	//Ventilátor
 	public static final AssetDescriptor<TextureAtlas> BLOWER_TEXTURE
 			= new AssetDescriptor<TextureAtlas>("blower/rotate.atlas", TextureAtlas.class);
+
+	//Szél
+	public static final AssetDescriptor<TextureAtlas> WIND_TEXTURE
+			= new AssetDescriptor<TextureAtlas>("wind/winding.atlas", TextureAtlas.class);
 
 	//Hangok
 	public static final AssetDescriptor<Sound> ThemeSound
@@ -96,6 +101,7 @@ public class Assets {
 		//Animált texturák atlaszai
 		manager.load(WALK_TEXTURE);
 		manager.load(BLOWER_TEXTURE);
+		manager.load(WIND_TEXTURE);
 
 		//Hangok
 		manager.load(ThemeSound);
