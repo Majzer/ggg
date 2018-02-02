@@ -36,13 +36,6 @@ public class Assets {
 		fontParameter.fontParameters.color = Color.WHITE;
 	}
 
-	static final FreetypeFontLoader.FreeTypeFontLoaderParameter fontParameter_medieval = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
-	static {
-		fontParameter.fontFileName = "Augusta.ttf";
-		fontParameter.fontParameters.size = 30;
-		fontParameter.fontParameters.characters = CHARS;
-		fontParameter.fontParameters.color = Color.WHITE;
-	}
 
 	//Betútípus
 	public static final AssetDescriptor<BitmapFont> ARIAL_30_FONT
@@ -61,11 +54,18 @@ public class Assets {
 			= new AssetDescriptor<TextureAtlas>("blower/rotate.atlas", TextureAtlas.class);
 
 	//Hangok
-	/*
-	public static final AssetDescriptor<Sound> WINNER_SOUND
-			=new AssetDescriptor<Sound>("hangok/Winner.wav", Sound.class);
+	public static final AssetDescriptor<Sound> ThemeSound
+			=new AssetDescriptor<Sound>("sound/game_themesound.wav", Sound.class);
 
-	*/
+	public static final AssetDescriptor<Sound> MenuTheme
+			=new AssetDescriptor<Sound>("sound/mune_theme_sound.wav", Sound.class);
+
+	public static final AssetDescriptor<Sound> WindSound
+			=new AssetDescriptor<Sound>("sound/wind_sound_2.0.wav", Sound.class);
+
+	public static final AssetDescriptor<Sound> FanSound
+			=new AssetDescriptor<Sound>("sound/mune_theme_sound.wav", Sound.class);
+
 	public static void prepare() {
 		manager = new AssetManager();
 		Texture.setAssetManager(manager);
@@ -97,7 +97,11 @@ public class Assets {
 		manager.load(WALK_TEXTURE);
 		manager.load(BLOWER_TEXTURE);
 
-
+		//Hangok
+		manager.load(ThemeSound);
+		manager.load(MenuTheme);
+		manager.load(WindSound);
+		manager.load(FanSound);
 	}
 
     public static void afterLoaded() {

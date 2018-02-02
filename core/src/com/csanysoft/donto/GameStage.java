@@ -2,15 +2,34 @@ package com.csanysoft.donto;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.csanysoft.donto.GlobalClasses.Assets;
 import com.csanysoft.donto.MyBaseClasses.Scene2D.MyStage;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by Majzer on 02/02/2018.
  */
 
 public class GameStage extends MyStage {
+
+    ArrayList<PlatformActor> platforms = new ArrayList<PlatformActor>();
+    PlatformActor platformActor;
+    AndroidActor androidActor;
+
     public GameStage(Viewport viewport, Batch batch, Donto game) {
         super(viewport, batch, game);
+        Random rand = new Random();
+        addActor(platformActor=new PlatformActor(0,100));
+        addActor(androidActor=new AndroidActor(Assets.manager.get(Assets.WALK_TEXTURE)));
+        androidActor.setPosition(platformActor.getX(),platformActor.getY()+platformActor.getHeight()-8);
+        for(int i = 2; i < 11; i++) {
+            addActor(platformActor=new PlatformActor(i*1000,rand.nextInt(500)+100));
+            platforms.add(platformActor);
+        }
+
+
     }
 
     @Override
@@ -21,5 +40,6 @@ public class GameStage extends MyStage {
     @Override
     public void act() {
         super.act();
+
     }
 }
