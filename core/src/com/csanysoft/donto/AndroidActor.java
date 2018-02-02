@@ -10,5 +10,6 @@ import com.csanysoft.donto.MyBaseClasses.Scene2D.OneSpriteAnimatedActor;
 public class AndroidActor extends OneSpriteAnimatedActor {
     public AndroidActor(TextureAtlas textureAtlas) {
         super(textureAtlas);
+        setFps(24);
     }
 }
