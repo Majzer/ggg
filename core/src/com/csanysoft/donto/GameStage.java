@@ -60,8 +60,7 @@ public class GameStage extends MyStage {
         addActor(androidActor=new AndroidActor());
         androidActor.setPosition(platformActor.getX(),platformActor.getY()+platformActor.getHeight()+20);
         addActor(fanActor = new FanActor());
-        fanActor.setY(androidActor.getY());
-        fanActor.setZIndex(5);
+
         platforms.add(platformActor);
         platformActor.setZIndex(3);
         addActor(windActor = new WindActor());
@@ -116,8 +115,6 @@ public class GameStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
-
-        windActor.setX(androidActor.getX());
         windActor.setVisible(fanActor.isRunning());
 
 //        helpHand.setPosition(androidActor.getX(), androidActor.getY());
@@ -136,6 +133,8 @@ public class GameStage extends MyStage {
             if(fanActor!=null){
                 fanActor.setY(androidActor.getY()-575);
                 fanActor.setX(androidActor.getX()-fanActor.getWidth()/2+androidActor.getWidth()/2);
+                windActor.setY(fanActor.getY()+100);
+                windActor.setX(fanActor.getX()+160);
             }
             androidActor.setSpeedX(baseSpeed);
             if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isTouched()){
