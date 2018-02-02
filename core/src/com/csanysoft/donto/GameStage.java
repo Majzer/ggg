@@ -67,9 +67,9 @@ public class GameStage extends MyStage {
             platforms.add(platformActor);
     }
 
-        helpHand.setPosition(0,0);
-        addActor(helpHand);
-        helpHand.setVisible(true);
+        //helpHand.setPosition(0,0);
+        //addActor(helpHand);
+        //helpHand.setVisible(true);
 
         bg.setZIndex(1);
         platformActor.setZIndex(3);
@@ -111,8 +111,8 @@ public class GameStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
 
-        helpHand.setPosition(androidActor.getX(), androidActor.getY());
-        helpHand.setSize(getWidth() + (float)Math.cos(elapsedTime*10)/40, getHeight() + (float)Math.sin(elapsedTime*10)/40);
+//        helpHand.setPosition(androidActor.getX(), androidActor.getY());
+        //helpHand.setSize(getWidth() + (float)Math.cos(elapsedTime*10)/40, getHeight() + (float)Math.sin(elapsedTime*10)/40);
         fanActor.setX(androidActor.getX());
 
 
@@ -130,7 +130,7 @@ public class GameStage extends MyStage {
             if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isTouched()){
                 androidActor.up();
                 fanActor.turnOn();
-                helpHand.setVisible(false);
+//                helpHand.setVisible(false);
             } else if(!onPlatform){
                 androidActor.down();
                 fanActor.turnOff();
@@ -160,16 +160,11 @@ public class GameStage extends MyStage {
                 if(androidActor.overlaps(ShapeType.Rectangle,pa)){
                     int aY = (int)androidActor.getY();
                     float paYH = pa.getY()+pa.getHeight();
-                    System.out.println("androidActor.getSpeedY() = " + androidActor.getSpeedY());
-                    System.out.println("(int)(androidActor.getX() + androidActor.getWidth()) = " + (int)(androidActor.getX() + androidActor.getWidth()));
-                    System.out.println("pa.getX() = " + pa.getX());
                     if((int)(androidActor.getX() + androidActor.getWidth()) > pa.getX()-50 && (int)(androidActor.getX() + androidActor.getWidth()) < pa.getX()+10){
-                        System.out.println("fejicjgirjticgr");
                         androidActor.setSpeedX(0);
                     }
                     
                     else if (aY+androidActor.getHeight() < pa.getY()+10){
-                        System.out.println("alulról");
                         androidActor.setY(pa.getY()-androidActor.getHeight());
                     }
                     else{
