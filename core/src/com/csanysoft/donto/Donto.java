@@ -22,12 +22,30 @@ public class Donto extends MyGame {
 
 
 
-	public TextButton.TextButtonStyle btnStart() {
+	public TextButton.TextButtonStyle btnOn() {
 		TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
 		textButtonStyle.font = Assets.manager.get(Assets.ARIAL_30_FONT);
 		textButtonStyle.up = new TextureRegionDrawable(new TextureRegion(Assets.manager.get(Assets.BTN_ON_BUTTON_TEXTURE)));
 		textButtonStyle.over = new TextureRegionDrawable(new TextureRegion(Assets.manager.get(Assets.BTN_ON_BUTTON_TEXTURE)));
 		textButtonStyle.down = new TextureRegionDrawable(new TextureRegion(Assets.manager.get(Assets.BTN_ON_BUTTON_DOWN_TEXTURE)));
+		return textButtonStyle;
+	}
+
+	public TextButton.TextButtonStyle btnStart() {
+		TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
+		textButtonStyle.font = Assets.manager.get(Assets.ARIAL_30_FONT);
+		textButtonStyle.up = new TextureRegionDrawable(new TextureRegion(Assets.manager.get(Assets.BTN_START_TEXTURE)));
+		textButtonStyle.over = new TextureRegionDrawable(new TextureRegion(Assets.manager.get(Assets.BTN_START_TEXTURE)));
+		textButtonStyle.down = new TextureRegionDrawable(new TextureRegion(Assets.manager.get(Assets.BTN_START_DOWN_TEXTURE)));
+		return textButtonStyle;
+	}
+
+	public TextButton.TextButtonStyle btnExit() {
+		TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
+		textButtonStyle.font = Assets.manager.get(Assets.ARIAL_30_FONT);
+		textButtonStyle.up = new TextureRegionDrawable(new TextureRegion(Assets.manager.get(Assets.BTN_EXIT_TEXTURE)));
+		textButtonStyle.over = new TextureRegionDrawable(new TextureRegion(Assets.manager.get(Assets.BTN_EXIT_TEXTURE)));
+		textButtonStyle.down = new TextureRegionDrawable(new TextureRegion(Assets.manager.get(Assets.BTN_EXIT_DOWN_TEXTURE)));
 		return textButtonStyle;
 	}
 }

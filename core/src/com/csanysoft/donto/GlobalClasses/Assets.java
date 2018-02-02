@@ -67,10 +67,22 @@ public class Assets {
 
 	//Gomb texturák
 	public static final AssetDescriptor<Texture> BTN_ON_BUTTON_TEXTURE
-			= new AssetDescriptor<Texture>("on_button/on_button.png", Texture.class);
+			= new AssetDescriptor<Texture>("buttons/on_button/on_button.png", Texture.class);
 
 	public static final AssetDescriptor<Texture> BTN_ON_BUTTON_DOWN_TEXTURE
-			= new AssetDescriptor<Texture>("on_button/on_button_down.png", Texture.class);
+			= new AssetDescriptor<Texture>("buttons/on_button/on_button_down.png", Texture.class);
+
+	public static final AssetDescriptor<Texture> BTN_START_TEXTURE
+			= new AssetDescriptor<Texture>("buttons/menu/start.png", Texture.class);
+
+	public static final AssetDescriptor<Texture> BTN_START_DOWN_TEXTURE
+			= new AssetDescriptor<Texture>("buttons/menu/start_down.png", Texture.class);
+
+	public static final AssetDescriptor<Texture> BTN_EXIT_TEXTURE
+			= new AssetDescriptor<Texture>("buttons/menu/exit.png", Texture.class);
+
+	public static final AssetDescriptor<Texture> BTN_EXIT_DOWN_TEXTURE
+			= new AssetDescriptor<Texture>("buttons/menu/exit_down.png", Texture.class);
 	//---------------------------------------------------------------------------------------------------------
 
 	//Hangok
@@ -123,6 +135,10 @@ public class Assets {
 		//Gombok
 		manager.load(BTN_ON_BUTTON_TEXTURE);
 		manager.load(BTN_ON_BUTTON_DOWN_TEXTURE);
+		manager.load(BTN_START_TEXTURE);
+		manager.load(BTN_START_DOWN_TEXTURE);
+		manager.load(BTN_EXIT_TEXTURE);
+		manager.load(BTN_EXIT_DOWN_TEXTURE);
 
 		//Hangok
 		manager.load(ThemeSound);

@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.csanysoft.donto.GlobalClasses.Assets;
+import com.csanysoft.donto.MyBaseClasses.Scene2D.MyButton;
 import com.csanysoft.donto.MyBaseClasses.Scene2D.MyStage;
 import com.csanysoft.donto.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import com.csanysoft.donto.MyBaseClasses.Scene2D.ShapeType;
@@ -36,9 +37,6 @@ public class GameStage extends MyStage {
 
     public GameStage(Viewport viewport, Batch batch, Donto game) {
         super(viewport, batch, game);
-        platformActor.setZIndex(3);
-        androidActor.setZIndex(2);
-        bg.setZIndex(1);
         addActor(platformActor=new PlatformActor(i++,100));
         platforms.add(platformActor);
         addActor(androidActor=new AndroidActor(Assets.manager.get(Assets.WALK_TEXTURE)));
@@ -51,14 +49,13 @@ public class GameStage extends MyStage {
         bg = new OneSpriteStaticActor(Assets.manager.get(Assets.BACKGROUND_TEXTURE));
         addActor(bg);
 
-
         platformActor.setZIndex(3);
         androidActor.setZIndex(2);
         bg.setZIndex(1);
 
-        // TODO: 2018. 02. 02.  kommentet kitörölni
-        //btnOn = new MyButton("", game.btnOn());
-        /*
+
+        btnOn = new MyButton("", game.btnOn());
+
 
         btnOn.addListener(new ClickListener(){
             @Override
@@ -67,7 +64,7 @@ public class GameStage extends MyStage {
             }
         });
         addActor(btnOn);
-        */
+
     setDebugAll(true);
     }
 
