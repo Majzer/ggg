@@ -90,7 +90,7 @@ public class GameStage extends MyStage {
         bg.setZIndex(1);
         platformActor.setZIndex(3);
         androidActor.setZIndex(2);
-        setDebugAll(true);
+        //setDebugAll(true);
 
         sound.play();
         sound.setVolume(0.4f);
@@ -166,9 +166,10 @@ public class GameStage extends MyStage {
             else {
                 androidActor.land();
                 walk.play();
-                walk.setVolume(0.4f);
+                walk.setVolume(2f);
                 walk.setLooping(true);
             }
+
 
             setCameraMoveToXY(androidActor.getX(), androidActor.getY(), 1.5f);
             if(bg!=null){

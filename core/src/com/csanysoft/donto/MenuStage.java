@@ -2,6 +2,7 @@ package com.csanysoft.donto;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -16,6 +17,7 @@ import com.csanysoft.donto.GlobalClasses.Assets;
 import com.csanysoft.donto.MyBaseClasses.Scene2D.MyButton;
 import com.csanysoft.donto.MyBaseClasses.Scene2D.MyStage;
 import com.csanysoft.donto.MyBaseClasses.Scene2D.OneSpriteStaticActor;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 /**
  * Created by tanulo on 2018. 01. 15..
@@ -26,7 +28,9 @@ public class MenuStage extends MyStage {
     TextButton btnStart , btnExit;
     OneSpriteStaticActor penlogo , whiterect;
     OneSpriteStaticActor bg;
+    Label ismerteto;
     PlatformActor platformActor1 , platformActor2 , platformActor3 , platformActor4;
+
     Music menu;
 
     public MenuStage(Viewport viewport, Batch batch, Donto game) {
@@ -48,10 +52,21 @@ public class MenuStage extends MyStage {
     public void act(float delta) {
     }
 
+    public Label.LabelStyle getLabelStyle() {
+        Label.LabelStyle style;
+        style = new com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle();
+        style.font = Assets.manager.get(Assets.ARIAL_30_FONT);
+        style.fontColor = Color.BLACK;
+        return style;
+    }
 
     @Override
     public void init () {
 
+        ismerteto = new Label("Ön meddig tud eljutni PENdroid-dal?\nPróbája meg ön is!", getLabelStyle());
+        ismerteto.setPosition(getViewport().getWorldHeight()/2-ismerteto.getHeight(),getViewport().getWorldWidth()/2.5f-ismerteto.getWidth()/2.5f);
+        ismerteto.setZIndex(100);
+        addActor(ismerteto);
         btnStart = new MyButton("", game.btnStart());
         btnStart.addListener(new ClickListener(){
             @Override

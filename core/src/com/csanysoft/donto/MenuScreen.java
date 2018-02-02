@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.csanysoft.donto.MyBaseClasses.Scene2D.MyScreen;
 
+import java.awt.Label;
+
 /**
  * Created by tanulo on 2018. 01. 15..
  */
