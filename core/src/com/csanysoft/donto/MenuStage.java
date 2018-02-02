@@ -26,21 +26,22 @@ public class MenuStage extends MyStage {
     TextButton btnStart , btnExit;
     OneSpriteStaticActor penlogo , whiterect;
     OneSpriteStaticActor bg;
+    PlatformActor platformActor1 , platformActor2 , platformActor3 , platformActor4;
     Music menu;
 
     public MenuStage(Viewport viewport, Batch batch, Donto game) {
         super(viewport, batch, game);
+
+
+        addActor(platformActor1 = new PlatformActor(650 , 35));
+        addActor(platformActor3 = new PlatformActor(200 , 150));
+
         menu = Assets.manager.get(Assets.MenuTheme);
-        //bg = new OneSpriteStaticActor(Assets.manager.get(Assets.BACKGROUND_TEXTURE));
-       // bg.setSize(getViewport().getScreenWidth(),getViewport().getScreenHeight()*1.3f);
-       // bg.setPosition(0,0);
-       // bg.setZIndex(1);
-        //addActor(bg);
         menu.play();
         menu.setVolume(0.4f);
         menu.setLooping(true);
 
-
+        setDebugAll(true);
     }
 
     @Override
@@ -73,11 +74,12 @@ public class MenuStage extends MyStage {
         btnExit.setZIndex(2);
         addActor(btnExit);
 
-        btnStart.setPosition(getViewport().getScreenWidth()/2-100, getViewport().getWorldHeight()/2);
+        btnStart.setPosition(getViewport().getWorldWidth()/2-btnStart.getWidth()/2, getViewport().getWorldHeight()/1.5f);
         btnExit.setPosition(btnStart.getX() , btnStart.getY()-btnExit.getHeight()-50);
 
-        btnStart.setZIndex(2);
-        btnExit.setZIndex(3);
+
+        btnStart.setZIndex(5);
+        btnExit.setZIndex(5);
     }
 
     @Override
