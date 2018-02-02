@@ -49,6 +49,7 @@ public class GameStage extends MyStage {
         bg = new OneSpriteStaticActor(Assets.manager.get(Assets.BACKGROUND_TEXTURE));
         addActor(bg);
 
+
         platformActor.setZIndex(3);
         androidActor.setZIndex(2);
         bg.setZIndex(1);
