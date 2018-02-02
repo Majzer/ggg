@@ -150,10 +150,13 @@ public class GameStage extends MyStage {
                     int aY = (int)androidActor.getY();
                     float paYH = pa.getY()+pa.getHeight();
                     System.out.println("androidActor.getSpeedY() = " + androidActor.getSpeedY());
-                    if(aY < paYH && aY+androidActor.getHeight() > pa.getY()+100 && aY+pa.getHeight() < paYH){
-                        System.out.println("oldalról");
+                    System.out.println("(int)(androidActor.getX() + androidActor.getWidth()) = " + (int)(androidActor.getX() + androidActor.getWidth()));
+                    System.out.println("pa.getX() = " + pa.getX());
+                    if((int)(androidActor.getX() + androidActor.getWidth()) > pa.getX()-50 && (int)(androidActor.getX() + androidActor.getWidth()) < pa.getX()+10){
+                        System.out.println("fejicjgirjticgr");
                         androidActor.setSpeedX(0);
                     }
+                    
                     else if (aY+androidActor.getHeight() < pa.getY()+10){
                         System.out.println("alulról");
                         androidActor.setY(pa.getY()-androidActor.getHeight());
