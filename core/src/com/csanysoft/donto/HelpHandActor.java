@@ -16,6 +16,7 @@ public class HelpHandActor extends OneSpriteStaticActor {
     public HelpHandActor(float x, float y) {
         super(Assets.manager.get(Assets.HELP_HAND_TEXTURE));
         setPosition(x,y);
+        setSize(getWidth()*1.2f ,getHeight()*1.2f );
     }
 
     @Override
