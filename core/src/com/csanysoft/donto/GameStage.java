@@ -52,7 +52,7 @@ public class GameStage extends MyStage {
         });
         addActor(btnOn);
         */
-
+    setDebugAll(true);
     }
 
     @Override
