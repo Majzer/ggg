@@ -57,13 +57,16 @@ public class Assets {
 
 	public static final AssetDescriptor<Texture> HELP_HAND_TEXTURE
 			= new AssetDescriptor<Texture>("help_hand.png", Texture.class);
+
+	public static final AssetDescriptor<Texture> FLOPPY_TEXTURE
+			= new AssetDescriptor<Texture>("floppy.png", Texture.class);
 	//---------------------------------------------------------------------------------------------------------
 
 	//Animált dolgok
 
 	//Android bábú
 	public static final AssetDescriptor<TextureAtlas> WALK_TEXTURE
-			= new AssetDescriptor<TextureAtlas>("android/walk.atlas", TextureAtlas.class);
+			= new AssetDescriptor<TextureAtlas>("android/walkx.atlas", TextureAtlas.class);
 
 	//Ventilátor
 	public static final AssetDescriptor<TextureAtlas> BLOWER_TEXTURE
@@ -101,8 +104,6 @@ public class Assets {
 	public static final AssetDescriptor<Music> MenuTheme
 			=new AssetDescriptor<Music>("sound/mune_theme_sound.wav", Music.class);
 
-	public static final AssetDescriptor<Music> WindSound
-			=new AssetDescriptor<Music>("sound/wind_sound_2.0.wav", Music.class);
 
 	public static final AssetDescriptor<Music> FanSound
 			=new AssetDescriptor<Music>("sound/fan_sound.wav", Music.class);
@@ -140,6 +141,7 @@ public class Assets {
 		manager.load(BACKGROUND_TEXTURE);
 		manager.load(HELP_HAND_TEXTURE);
 		manager.load(WHITE_RECTANGLE_TEXTURE);
+		manager.load(FLOPPY_TEXTURE);
 
 
 		//Animált texturák atlaszai
@@ -158,7 +160,7 @@ public class Assets {
 		//Hangok
 		manager.load(ThemeSound);
 		manager.load(MenuTheme);
-		manager.load(WindSound);
+
 		manager.load(FanSound);
 		manager.load(WalkSound);
 	}

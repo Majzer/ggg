@@ -32,6 +32,7 @@ public class MenuStage extends MyStage {
     PlatformActor platformActor1 , platformActor2 , platformActor3 , platformActor4;
 
     Music menu;
+    Music theme;
 
     public MenuStage(Viewport viewport, Batch batch, Donto game) {
         super(viewport, batch, game);
@@ -40,12 +41,14 @@ public class MenuStage extends MyStage {
         addActor(platformActor1 = new PlatformActor(650 , 35));
         addActor(platformActor3 = new PlatformActor(200 , 150));
 
-        menu = Assets.manager.get(Assets.MenuTheme);
-        menu.play();
-        menu.setVolume(0.4f);
-        menu.setLooping(true);
+        theme = Assets.manager.get(Assets.MenuTheme);
+        menu = Assets.manager.get(Assets.ThemeSound);
+        menu.pause();
+        theme.play();
+        theme.setVolume(0.8f);
+        theme.setLooping(true);
 
-        setDebugAll(true);
+        //setDebugAll(true);
     }
 
     @Override

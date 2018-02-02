@@ -43,6 +43,8 @@ public class GameStage extends MyStage {
     int i=0;
     Music sound;
     Music walk;
+    Music theme;
+
 
 
 
@@ -57,6 +59,7 @@ public class GameStage extends MyStage {
 
         sound = Assets.manager.get(Assets.ThemeSound);
         walk = Assets.manager.get(Assets.WalkSound);
+        theme = Assets.manager.get(Assets.MenuTheme);
 
 
         addActor(platformActor=new PlatformActor(i++,100));
@@ -90,8 +93,8 @@ public class GameStage extends MyStage {
         bg.setZIndex(1);
         platformActor.setZIndex(3);
         androidActor.setZIndex(2);
-        //setDebugAll(true);
-
+        setDebugAll(true);
+        theme.pause();
         sound.play();
         sound.setVolume(0.4f);
         sound.setLooping(true);
@@ -108,7 +111,7 @@ public class GameStage extends MyStage {
         });
         addActor(btnOn);
         */
-    setDebugAll(true);
+    //setDebugAll(true);
     }
 
     boolean removePlatformFromArrayList = false;
@@ -116,6 +119,9 @@ public class GameStage extends MyStage {
     boolean onPlatform = false;
     float elapsedTimeForAndroidActor=0;
     float baseSpeed=4;
+    float first = 10000;
+    boolean egyszer = true;
+    boolean mehetFel = true;
 
     @Override
     public void init() {
@@ -129,7 +135,6 @@ public class GameStage extends MyStage {
 
 //        helpHand.setPosition(androidActor.getX(), androidActor.getY());
         //helpHand.setSize(getWidth() + (float)Math.cos(elapsedTime*10)/40, getHeight() + (float)Math.sin(elapsedTime*10)/40);
-        fanActor.setX(androidActor.getX());
 
         helpHand.setPosition(androidActor.getX()+androidActor.getWidth()/2-40, androidActor.getY()+androidActor.getHeight()/2-35);
 
@@ -145,19 +150,38 @@ public class GameStage extends MyStage {
                 fanActor.setX(androidActor.getX()-fanActor.getWidth()/2+androidActor.getWidth()/2);
             }
             androidActor.setSpeedX(baseSpeed);
-            if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isTouched()){
-                androidActor.up();
-                fanActor.turnOn();
 
-                for(WindActor windActor : winds){
-                    windActor.setVisible(true);
-                    windActor.setPosition(fanActor.getX()+rand.nextInt((int)fanActor.getWidth()), fanActor.getY()+fanActor.getHeight()+rand.nextInt(getViewport().getScreenHeight()));
+            if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isTouched()){
+                if(mehetFel) {
+                    if (egyszer) {
+                        fanActor.ido = elapsedTime;
+                        egyszer = false;
+                    }
+                    if (elapsedTime - fanActor.ido > 5) {
+                        System.out.println("most");
+                        mehetFel = false;
+                        androidActor.down();
+                        fanActor.turnOff();
+                        for(WindActor windActor : winds){
+                            windActor.setVisible(false);
+                        }
+                        //androidActor.land();
+                    } else {
+                        androidActor.up();
+                        fanActor.turnOn();
+                        for (WindActor windActor : winds) {
+                            windActor.setVisible(true);
+                            windActor.setPosition(fanActor.getX() + rand.nextInt((int) fanActor.getWidth()), fanActor.getY() + fanActor.getHeight() + rand.nextInt(getViewport().getScreenHeight()));
+                        }
+                        walk.pause();
+                        helpHand.setVisible(false);
+                    }
                 }
-                walk.pause();
-                helpHand.setVisible(false);
             } else if(!onPlatform){
                 androidActor.down();
                 fanActor.turnOff();
+                egyszer = true;
+                mehetFel=true;
                 for(WindActor windActor : winds){
                     windActor.setVisible(false);
                 }
@@ -166,10 +190,9 @@ public class GameStage extends MyStage {
             else {
                 androidActor.land();
                 walk.play();
-                walk.setVolume(2f);
+                walk.setVolume(0.4f);
                 walk.setLooping(true);
             }
-
 
             setCameraMoveToXY(androidActor.getX(), androidActor.getY(), 1.5f);
             if(bg!=null){
@@ -213,6 +236,7 @@ public class GameStage extends MyStage {
 
             if(removePlatformFromArrayList){
                 platforms.add(platformActor);
+                platformActor.setZIndex(4);
                 platforms.remove(removablePlatform);
                 removePlatformFromArrayList=false;
             }
