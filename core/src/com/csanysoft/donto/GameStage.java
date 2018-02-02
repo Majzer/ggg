@@ -1,5 +1,7 @@
 package com.csanysoft.donto;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.csanysoft.donto.GlobalClasses.Assets;
@@ -17,18 +19,19 @@ public class GameStage extends MyStage {
     ArrayList<PlatformActor> platforms = new ArrayList<PlatformActor>();
     PlatformActor platformActor;
     AndroidActor androidActor;
+    int i=0;
+
 
     public GameStage(Viewport viewport, Batch batch, Donto game) {
         super(viewport, batch, game);
         Random rand = new Random();
-        addActor(platformActor=new PlatformActor(0,100));
+        addActor(platformActor=new PlatformActor(i++,100));
         addActor(androidActor=new AndroidActor(Assets.manager.get(Assets.WALK_TEXTURE)));
         androidActor.setPosition(platformActor.getX(),platformActor.getY()+platformActor.getHeight()-8);
-        for(int i = 2; i < 11; i++) {
+        for(;i < 11; i++) {
             addActor(platformActor=new PlatformActor(i*1000,rand.nextInt(500)+100));
             platforms.add(platformActor);
         }
-
 
     }
 
@@ -38,8 +41,15 @@ public class GameStage extends MyStage {
     }
 
     @Override
-    public void act() {
-        super.act();
+    public void act(float delta) {
+        super.act(delta);
+        if(androidActor!=null){
+            if(Gdx.input.isKeyPressed(Input.Keys.UP)){
+                androidActor.up();
+            } else if(!(androidActor.getY()<100)) androidActor.down();
 
+            setCameraMoveToXY(androidActor.getX(), androidActor.getY());
+        }
     }
 }
+
