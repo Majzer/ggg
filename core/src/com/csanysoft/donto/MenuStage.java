@@ -41,7 +41,7 @@ public class MenuStage extends MyStage {
         menu.setVolume(0.4f);
         menu.setLooping(true);
 
-        setDebugAll(true);
+        //setDebugAll(true);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class MenuStage extends MyStage {
         btnExit.setZIndex(2);
         addActor(btnExit);
 
-        btnStart.setPosition(getViewport().getScreenWidth()/2-100, getViewport().getWorldHeight()/2);
+        btnStart.setPosition(getViewport().getWorldWidth()/2-btnStart.getWidth()/2, getViewport().getWorldHeight()/1.5f);
         btnExit.setPosition(btnStart.getX() , btnStart.getY()-btnExit.getHeight()-50);
 
 
