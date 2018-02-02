@@ -42,6 +42,7 @@ public class GameStage extends MyStage {
     TextButton btnOn;
     int i=0;
     Music sound;
+    Music walk;
 
 
 
