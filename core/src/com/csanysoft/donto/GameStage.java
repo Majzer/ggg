@@ -17,6 +17,8 @@ import com.csanysoft.donto.MyBaseClasses.Scene2D.MyButton;
 import com.csanysoft.donto.MyBaseClasses.Scene2D.MyStage;
 import com.csanysoft.donto.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import com.csanysoft.donto.MyBaseClasses.Scene2D.ShapeType;
+import com.csanysoft.donto.MyBaseClasses.WindActor;
+import com.sun.org.apache.xpath.internal.operations.And;
 
 import java.lang.reflect.AccessibleObject;
 import java.util.ArrayList;
@@ -31,6 +33,7 @@ public class GameStage extends MyStage {
     ArrayList<PlatformActor> platforms = new ArrayList<PlatformActor>();
     PlatformActor platformActor;
     AndroidActor androidActor;
+    WindActor windActor;
     FanActor fanActor;
     HelpHandActor helpHand;
     Random rand = new Random();
@@ -59,10 +62,12 @@ public class GameStage extends MyStage {
         addActor(androidActor=new AndroidActor());
         androidActor.setPosition(platformActor.getX(),platformActor.getY()+platformActor.getHeight()+20);
         addActor(fanActor = new FanActor());
-        fanActor.setY(androidActor.getY());
-        fanActor.setZIndex(5);
+
         platforms.add(platformActor);
         platformActor.setZIndex(3);
+        addActor(windActor = new WindActor());
+        windActor.setZIndex(5);
+        windActor.setY(fanActor.getY()+100);
         for(;i < 11; i++) {
             addActor(platformActor=new PlatformActor(i*1100 + rand.nextInt(500),rand.nextInt(500)+100));
             platformActor.setZIndex(3);
@@ -112,9 +117,12 @@ public class GameStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
+        windActor.setVisible(fanActor.isRunning());
 
 //        helpHand.setPosition(androidActor.getX(), androidActor.getY());
         //helpHand.setSize(getWidth() + (float)Math.cos(elapsedTime*10)/40, getHeight() + (float)Math.sin(elapsedTime*10)/40);
+        fanActor.setX(androidActor.getX());
+
         helpHand.setPosition(androidActor.getX()+androidActor.getWidth()/2-40, androidActor.getY()+androidActor.getHeight()/2-35);
 
         if(androidActor!=null){
@@ -127,6 +135,8 @@ public class GameStage extends MyStage {
             if(fanActor!=null){
                 fanActor.setY(androidActor.getY()-575);
                 fanActor.setX(androidActor.getX()-fanActor.getWidth()/2+androidActor.getWidth()/2);
+                windActor.setY(fanActor.getY()+100);
+                windActor.setX(fanActor.getX()+160);
             }
             androidActor.setSpeedX(baseSpeed);
             if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isTouched()){
@@ -195,14 +205,9 @@ public class GameStage extends MyStage {
         }
 
 
-        /*if (androidActor.getY() > 800) {
-            if(rand.nextBoolean()) {
-                androidActor.setPosition(rand.nextInt()+10, rand.nextInt()-10);
-            } else {
-                androidActor.setPosition(rand.nextInt()-10, rand.nextInt()+10);
-            }
-
-        }*/
+        if (androidActor.getY() < -200) {
+            game.setScreen(new MenuScreen(game));
+        }
     }
 }
 
