@@ -36,9 +36,6 @@ public class GameStage extends MyStage {
 
     public GameStage(Viewport viewport, Batch batch, Donto game) {
         super(viewport, batch, game);
-        platformActor.setZIndex(3);
-        androidActor.setZIndex(2);
-        bg.setZIndex(1);
         addActor(platformActor=new PlatformActor(i++,100));
         platforms.add(platformActor);
         addActor(androidActor=new AndroidActor(Assets.manager.get(Assets.WALK_TEXTURE)));
@@ -73,6 +70,7 @@ public class GameStage extends MyStage {
 
     boolean removePlatformFromArrayList = false;
     PlatformActor removablePlatform = null;
+    boolean onPlatform = false;
 
     @Override
     public void init() {
@@ -83,13 +81,12 @@ public class GameStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
-
         if(androidActor!=null){
             androidActor.setSpeedX(4);
             //TODO: Majd megcsinálom szebbé by ifa
             if(Gdx.input.isKeyPressed(Input.Keys.UP)){
                 androidActor.up();
-            } else if(!(androidActor.getY()<100)) androidActor.down();
+            } else if(!onPlatform) androidActor.down();
 
             setCameraMoveToXY(androidActor.getX()+200, 400);
 
@@ -106,6 +103,7 @@ public class GameStage extends MyStage {
                 }
 
                 if(androidActor.overlaps(ShapeType.Rectangle,pa)){
+                    onPlatform = true;
                     System.out.println("Hozzáér");
                     float aY = androidActor.getY();
                     float paYH = pa.getY()+pa.getHeight();
