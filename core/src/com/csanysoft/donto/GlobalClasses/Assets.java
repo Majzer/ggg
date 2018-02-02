@@ -66,7 +66,7 @@ public class Assets {
 
 	//Android bábú
 	public static final AssetDescriptor<TextureAtlas> WALK_TEXTURE
-			= new AssetDescriptor<TextureAtlas>("android/walk.atlas", TextureAtlas.class);
+			= new AssetDescriptor<TextureAtlas>("android/walkx.atlas", TextureAtlas.class);
 
 	//Ventilátor
 	public static final AssetDescriptor<TextureAtlas> BLOWER_TEXTURE
