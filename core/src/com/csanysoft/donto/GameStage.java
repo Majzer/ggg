@@ -43,7 +43,7 @@ public class GameStage extends MyStage {
 
 
         // TODO: 2018. 02. 02. Ez piros volt valamiért
-        //sound = Assets.manager.get(Assets.ThemeSound);
+        sound = Assets.manager.get(Assets.ThemeSound);
 
         addActor(platformActor=new PlatformActor(i++,100));
         platforms.add(platformActor);
@@ -63,6 +63,7 @@ public class GameStage extends MyStage {
         bg.setZIndex(1);
         platformActor.setZIndex(3);
         androidActor.setZIndex(2);
+
 
         sound.play();
         sound.setVolume(0.4f);
