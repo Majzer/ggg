@@ -31,9 +31,10 @@ import java.util.Random;
 public class GameStage extends MyStage {
 
     ArrayList<PlatformActor> platforms = new ArrayList<PlatformActor>();
+    ArrayList<WindActor> winds = new ArrayList<WindActor>();
     PlatformActor platformActor;
     AndroidActor androidActor;
-    WindActor windActor;
+    WindActor windActor1, windActor2, windActor3, windActor4, windActor5;
     FanActor fanActor;
     HelpHandActor helpHand;
     Random rand = new Random();
@@ -41,6 +42,7 @@ public class GameStage extends MyStage {
     TextButton btnOn;
     int i=0;
     Music sound;
+    Music walk;
 
 
 
@@ -54,18 +56,27 @@ public class GameStage extends MyStage {
         bg.setZIndex(1);
 
         sound = Assets.manager.get(Assets.ThemeSound);
+        walk = Assets.manager.get(Assets.WalkSound);
 
 
         addActor(platformActor=new PlatformActor(i++,100));
         addActor(androidActor=new AndroidActor());
         androidActor.setPosition(platformActor.getX(),platformActor.getY()+platformActor.getHeight()+20);
         addActor(fanActor = new FanActor());
+        fanActor.setZIndex(5);
 
         platforms.add(platformActor);
         platformActor.setZIndex(3);
-        addActor(windActor = new WindActor());
-        windActor.setZIndex(5);
-        windActor.setY(fanActor.getY()+100);
+        winds.add(windActor1= new WindActor());
+        winds.add(windActor2= new WindActor());
+        winds.add(windActor3= new WindActor());
+        winds.add(windActor4= new WindActor());
+        winds.add(windActor5= new WindActor());
+        for(WindActor windActor : winds){
+            addActor(windActor);
+            windActor.setZIndex(5);
+            windActor.setVisible(false);
+        }
         for(;i < 11; i++) {
             addActor(platformActor=new PlatformActor(i*1100 + rand.nextInt(500),rand.nextInt(500)+100));
             platformActor.setZIndex(3);
@@ -115,7 +126,6 @@ public class GameStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
-        windActor.setVisible(fanActor.isRunning());
 
 //        helpHand.setPosition(androidActor.getX(), androidActor.getY());
         //helpHand.setSize(getWidth() + (float)Math.cos(elapsedTime*10)/40, getHeight() + (float)Math.sin(elapsedTime*10)/40);
@@ -133,22 +143,32 @@ public class GameStage extends MyStage {
             if(fanActor!=null){
                 fanActor.setY(androidActor.getY()-575);
                 fanActor.setX(androidActor.getX()-fanActor.getWidth()/2+androidActor.getWidth()/2);
-                windActor.setY(fanActor.getY()+100);
-                windActor.setX(fanActor.getX()+160);
             }
             androidActor.setSpeedX(baseSpeed);
             if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isTouched()){
-                if(fanActor.getTime()>0)
-                    fanActor.turnOn();
-                if(fanActor.isRunning()){
-                    androidActor.up();
+                androidActor.up();
+                fanActor.turnOn();
+
+                for(WindActor windActor : winds){
+                    windActor.setVisible(true);
+                    windActor.setPosition(fanActor.getX()+rand.nextInt((int)fanActor.getWidth()), fanActor.getY()+fanActor.getHeight()+rand.nextInt(getViewport().getScreenHeight()));
                 }
+                walk.pause();
                 helpHand.setVisible(false);
             } else if(!onPlatform){
                 androidActor.down();
                 fanActor.turnOff();
+                for(WindActor windActor : winds){
+                    windActor.setVisible(false);
+                }
+                walk.pause();
             }
-            else androidActor.land();
+            else {
+                androidActor.land();
+                walk.play();
+                walk.setVolume(0.4f);
+                walk.setLooping(true);
+            }
 
             setCameraMoveToXY(androidActor.getX(), androidActor.getY(), 1.5f);
             if(bg!=null) bg.setPosition(getCameraMoveToX()-getViewport().getScreenWidth()/1.335f, getCameraMoveToY()-getViewport().getScreenHeight()/1.335f);
