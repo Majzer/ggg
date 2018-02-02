@@ -87,7 +87,7 @@ public class GameStage extends MyStage {
         super.act(delta);
         if(androidActor!=null){
 
-            if(bg!=null) bg.setPosition(getCameraMoveToX(), getCameraMoveToY());
+
 
             androidActor.setSpeedX(4);
             //TODO: Majd megcsinálom szebbé by ifa
@@ -99,6 +99,7 @@ public class GameStage extends MyStage {
             else androidActor.land();
 
             setCameraMoveToXY(androidActor.getX(), androidActor.getY(), 1.5f);
+            if(bg!=null) bg.setPosition(getCameraMoveToX()-getViewport().getScreenWidth()/1.335f, getCameraMoveToY()-getViewport().getScreenHeight()/1.335f);
 
             Array<Actor> actors = getActors();
             ArrayList<Actor> deleteActor = new ArrayList<Actor>();
