@@ -2,6 +2,7 @@ package com.csanysoft.donto;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.csanysoft.donto.GlobalClasses.Assets;
 import com.csanysoft.donto.MyBaseClasses.Scene2D.MyStage;
+import com.csanysoft.donto.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import com.csanysoft.donto.MyBaseClasses.Scene2D.ShapeType;
 
 import java.lang.reflect.AccessibleObject;
@@ -27,12 +29,16 @@ public class GameStage extends MyStage {
     PlatformActor platformActor;
     AndroidActor androidActor;
     Random rand = new Random();
+    OneSpriteStaticActor bg;
     TextButton btnOn;
     int i=0;
 
 
     public GameStage(Viewport viewport, Batch batch, Donto game) {
         super(viewport, batch, game);
+        platformActor.setZIndex(3);
+        androidActor.setZIndex(2);
+        bg.setZIndex(1);
         addActor(platformActor=new PlatformActor(i++,100));
         platforms.add(platformActor);
         addActor(androidActor=new AndroidActor(Assets.manager.get(Assets.WALK_TEXTURE)));
@@ -41,6 +47,13 @@ public class GameStage extends MyStage {
             addActor(platformActor=new PlatformActor(i*1000,rand.nextInt(500)+100));
             platforms.add(platformActor);
         }
+
+        bg = new OneSpriteStaticActor(Assets.manager.get(Assets.BACKGROUND_TEXTURE));
+        addActor(bg);
+
+        platformActor.setZIndex(3);
+        androidActor.setZIndex(2);
+        bg.setZIndex(1);
 
         // TODO: 2018. 02. 02.  kommentet kitörölni
         //btnOn = new MyButton("", game.btnOn());
@@ -114,6 +127,16 @@ public class GameStage extends MyStage {
                 actors.removeValue(a, true);
             }
             setCameraMoveToXY(androidActor.getX(), androidActor.getY(), 1.5f);
+        }
+
+
+        if(androidActor.getY() > 800) {
+            if(rand.nextBoolean()) {
+                androidActor.setPosition(rand.nextInt()+10, rand.nextInt()-10);
+            } else {
+                androidActor.setPosition(rand.nextInt()-10, rand.nextInt()+10);
+            }
+
         }
     }
 }
