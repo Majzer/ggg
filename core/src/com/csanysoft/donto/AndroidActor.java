@@ -23,7 +23,6 @@ public class AndroidActor extends OneSpriteAnimatedActor {
     @Override
     public void act(float delta) {
         super.act(delta);
-
         if(movingState == 2){//Zuhanás
             fallingTime += delta;
         }else
