@@ -17,6 +17,7 @@ public class AndroidActor extends OneSpriteAnimatedActor {
 
     public AndroidActor() {
         super(Assets.manager.get(Assets.WALK_TEXTURE));
+        setFps(6);
     }
 
     @Override
@@ -51,7 +52,7 @@ public class AndroidActor extends OneSpriteAnimatedActor {
         return speedX;
     }
 
-    public void setSpeedX(int speedX) {
+    public void setSpeedX(float speedX) {
         this.speedX = speedX;
     }
 
@@ -60,7 +61,7 @@ public class AndroidActor extends OneSpriteAnimatedActor {
     }
 
     public void down(){
-        movingState = 2; //Zuhanás, TODO: platformra érkezéskor meghívni a land() methódust
+        movingState = 2; //Zuhanás
     }
 
     public void land(){
