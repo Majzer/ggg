@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.csanysoft.donto.Donto;
 import com.csanysoft.donto.Donto;
 import com.csanysoft.donto.GlobalClasses.*;
+import com.csanysoft.donto.MainScreen;
 import com.csanysoft.donto.MyBaseClasses.Scene2D.MyScreen;
 
 
@@ -31,6 +32,7 @@ public class LoadingScreen extends MyScreen {
 		spriteBatch.end();
 		if (Assets.manager.update()) {
 			Assets.afterLoaded();
+			game.setScreen(new MainScreen(game));
 		}
 	}
 
