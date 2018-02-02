@@ -20,7 +20,9 @@ abstract public class MyScreen implements Screen, InitableInterface {
 
     public final Donto game;
 
-
+    public static SpriteBatch getSpriteBatch() {
+        return spriteBatch;
+    }
 
     public MyScreen(Donto game) {
         this.game = game;

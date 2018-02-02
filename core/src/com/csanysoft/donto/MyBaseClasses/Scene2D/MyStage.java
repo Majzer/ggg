@@ -1,6 +1,7 @@
 package com.csanysoft.donto.MyBaseClasses.Scene2D;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -11,6 +12,8 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.csanysoft.donto.Donto;
 import com.csanysoft.donto.MyBaseClasses.Game.InitableInterface;
+
+import java.util.ArrayList;
 
 
 /**
@@ -43,6 +46,12 @@ abstract public class MyStage extends Stage implements InitableInterface {
         });
     }
 
+    public Donto getGame() {
+        return game;
+    }
+
+
+
     public Actor getLastAdded() {
         return getActors().get(getActors().size-1);
     }
@@ -71,12 +80,75 @@ abstract public class MyStage extends Stage implements InitableInterface {
         setCameraZoomXY(v.getWorldWidth()/2/f,v.getWorldHeight()/2,1/f);
     }
 
+
+
     private float cameraTargetX = 0;
     private float cameraTargetY = 0;
     private float cameraTargetZoom = 0;
     private float cameraMoveSpeed = 0;
     private float cameraZoomSpeed = 0;
 
+    public float getCameraMoveToX() {
+        return cameraTargetX;
+    }
+
+    public void setCameraMoveToX(float cameraTargetX) {
+        OrthographicCamera c = (OrthographicCamera)getCamera();
+        c.position.set(cameraTargetX,getCameraMoveToY(),0);
+        this.cameraTargetX = cameraTargetX;
+    }
+
+    public float getCameraMoveToY() {
+        return cameraTargetY;
+    }
+
+    public void setCameraMoveToY(float cameraTargetY) {
+        OrthographicCamera c = (OrthographicCamera)getCamera();
+        c.position.set(getCameraMoveToX(),cameraTargetY,0);
+        this.cameraTargetY = cameraTargetY;
+    }
+
+    public float getCameraMoveToZoom() {
+        return cameraTargetZoom;
+    }
+
+    public void setCameraMoveToZoom(float cameraTargetZoom) {
+        this.cameraTargetZoom = cameraTargetZoom;
+    }
+
+    public float getCameraMoveSpeed() {
+        return cameraMoveSpeed;
+    }
+
+    public void setCameraMoveSpeed(float cameraMoveSpeed) {
+        this.cameraMoveSpeed = cameraMoveSpeed;
+    }
+
+    public float getCameraZoomSpeed() {
+        return cameraZoomSpeed;
+    }
+
+    public void setCameraZoomSpeed(float cameraZoomSpeed) {
+        this.cameraZoomSpeed = cameraZoomSpeed;
+    }
+
+    public void setCameraMoveToXY(float x, float y)
+    {
+        OrthographicCamera c = (OrthographicCamera)getCamera();
+        c.position.set(x,y,0);
+        this.cameraTargetX = x;
+        this.cameraTargetY = y;
+    }
+
+
+    public void setCameraMoveToXY(float x, float y, float zoom)
+    {
+        cameraTargetX = x;
+        cameraTargetY = y;
+        cameraTargetZoom = zoom;
+    }
+
+    @Deprecated
     public void setCameraMoveToXY(float x, float y, float zoom, float speed)
     {
         cameraTargetX = x;
@@ -86,6 +158,7 @@ abstract public class MyStage extends Stage implements InitableInterface {
         cameraZoomSpeed = speed;
     }
 
+    @Deprecated
     public void setCameraMoveToXY(float x, float y, float zoom, float zoomSpeed, float moveSpeed)
     {
         cameraTargetX = x;
@@ -121,7 +194,7 @@ abstract public class MyStage extends Stage implements InitableInterface {
     }
 
     protected void resized(){
-        //setCameraResetToCenterOfScreen();
+        setCameraResetToCenterOfScreen();
     };
 
     @Override
@@ -175,5 +248,70 @@ abstract public class MyStage extends Stage implements InitableInterface {
 
     public void setElapsedTime(float elapsedTime) {
         this.elapsedTime = elapsedTime;
+    }
+
+    public void updateFrustumActorVisible(){
+        Camera c = getCamera();
+        for (Actor a: getActors()) {
+            a.setVisible(isActorShowing(c,a));
+        }
+    }
+
+    public void updateFrustumActorVisible(float zoom){
+        OrthographicCamera c = (OrthographicCamera)getCamera();
+        for (Actor a: getActors()) {
+            a.setVisible(isActorShowing(c,a, zoom));
+        }
+    }
+
+
+    public void updateFrustumActorRemove(){
+        Camera c = getCamera();
+        ArrayList<Actor> actors = new ArrayList<Actor>();
+        for (Actor a: getActors()) {
+            if(isActorShowing(c,a)) {
+                actors.add(a);
+            }
+        }
+        for (Actor a: getActors()){
+            getActors().removeValue(a,true);
+        }
+    }
+
+    public void updateFrustumActorRemove(float zoom){
+        OrthographicCamera c = (OrthographicCamera)getCamera();
+        ArrayList<Actor> actors = new ArrayList<Actor>();
+        for (Actor a: getActors()) {
+            if(isActorShowing(c,a,zoom)) {
+                actors.add(a);
+            }
+        }
+        for (Actor a: getActors()){
+            getActors().removeValue(a,true);
+        }
+    }
+    public boolean isActorShowing(Actor a, float zoom) {
+        return isActorShowing((OrthographicCamera)getCamera(),a,zoom);
+    }
+
+    public boolean isActorShowing(Actor a){
+        Camera c = getCamera();
+        return c.frustum.pointInFrustum(a.getX(), a.getY(), 0) || c.frustum.pointInFrustum(a.getX() + a.getWidth(), a.getY() + a.getHeight(), 0) ||
+                c.frustum.pointInFrustum(a.getX() + a.getWidth(), a.getY(), 0) || c.frustum.pointInFrustum(a.getX(), a.getY() + a.getHeight(), 0);
+    }
+
+    public static boolean isActorShowing(Camera c, Actor a){
+        return c.frustum.pointInFrustum(a.getX(), a.getY(), 0) || c.frustum.pointInFrustum(a.getX() + a.getWidth(), a.getY() + a.getHeight(), 0) ||
+                c.frustum.pointInFrustum(a.getX() + a.getWidth(), a.getY(), 0) || c.frustum.pointInFrustum(a.getX(), a.getY() + a.getHeight(), 0);
+    }
+
+    public static boolean isActorShowing(OrthographicCamera c, Actor a, float zoom){
+        float z = c.zoom;
+        c.zoom *= zoom;
+        c.update();
+        boolean b = isActorShowing(c,a);
+        c.zoom = z;
+        c.update();
+        return b;
     }
 }

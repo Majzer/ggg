@@ -26,6 +26,14 @@ public class AndroidActor extends OneSpriteAnimatedActor {
         return speed;
     }
 
+    public void up(){
+        setY(getY()+1);
+    }
+
+    public void down(){
+        setY(getY()-1);
+    }
+
     public void setSpeed(int speed) {
         this.speed = speed;
     }
