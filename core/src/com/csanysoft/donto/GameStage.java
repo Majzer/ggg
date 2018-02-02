@@ -77,10 +77,12 @@ public class GameStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
         if(androidActor!=null){
-            //TODO: Majd megcsinálom szebbé by ifa
             if(Gdx.input.isKeyPressed(Input.Keys.UP)){
                 androidActor.up();
-            } else if(!(androidActor.getY()<100)) androidActor.down();
+            }
+            if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+                androidActor.down();
+            }
 
             setCameraMoveToXY(androidActor.getX()+200, 400);
 
