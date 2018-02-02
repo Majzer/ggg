@@ -50,7 +50,6 @@ public class GameStage extends MyStage {
 
         bg.setZIndex(1);
 
-        // TODO: 2018. 02. 02. Ez piros volt valamiért
         sound = Assets.manager.get(Assets.ThemeSound);
 
 
@@ -67,9 +66,9 @@ public class GameStage extends MyStage {
             platforms.add(platformActor);
     }
 
-        helpHand.setPosition(0,0);
-        addActor(helpHand);
-        helpHand.setVisible(true);
+        addActor(helpHand = new HelpHandActor(androidActor.getX(),androidActor.getY()));
+        helpHand.setZIndex(4);
+
 
         bg.setZIndex(1);
         platformActor.setZIndex(3);
@@ -110,13 +109,8 @@ public class GameStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
-
-        helpHand.setPosition(androidActor.getX(), androidActor.getY());
-        helpHand.setSize(getWidth() + (float)Math.cos(elapsedTime*10)/40, getHeight() + (float)Math.sin(elapsedTime*10)/40);
         fanActor.setX(androidActor.getX());
-
-
-
+        helpHand.setPosition(androidActor.getX()+androidActor.getWidth()/2-40, androidActor.getY()+androidActor.getHeight()/2-35);
 
         if(androidActor!=null){
         if(elapsedTime-elapsedTimeForAndroidActor>10){
