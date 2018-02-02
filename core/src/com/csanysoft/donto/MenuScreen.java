@@ -42,7 +42,7 @@ public class MenuScreen extends MyScreen {
         Gdx.input.setInputProcessor(menuStage);
         //rgb(0, 184, 230)
         //rgb(66, 98, 244)
-        setBackGroundColor(0f, 0.31f, 1);
+        setBackGroundColor(0.4f, 0.86f, 1);
 
     }
 }
