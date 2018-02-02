@@ -3,6 +3,8 @@ package com.csanysoft.donto;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetDescriptor;
+import com.badlogic.gdx.audio.Music;
+
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -33,25 +35,38 @@ public class GameStage extends MyStage {
     OneSpriteStaticActor bg;
     TextButton btnOn;
     int i=0;
+    Music sound;
 
 
     public GameStage(Viewport viewport, Batch batch, Donto game) {
         super(viewport, batch, game);
+
+
+        // TODO: 2018. 02. 02. Ez piros volt valamiért
+        //sound = Assets.manager.get(Assets.ThemeSound);
+
         addActor(platformActor=new PlatformActor(i++,100));
         platforms.add(platformActor);
         addActor(androidActor=new AndroidActor(Assets.manager.get(Assets.WALK_TEXTURE)));
         androidActor.setPosition(platformActor.getX(),platformActor.getY()+platformActor.getHeight()+20);
         for(;i < 11; i++) {
             addActor(platformActor=new PlatformActor(i*1000,rand.nextInt(500)+100));
+            platformActor.setZIndex(3);
             platforms.add(platformActor);
         }
 
         bg = new OneSpriteStaticActor(Assets.manager.get(Assets.BACKGROUND_TEXTURE));
+        bg.setSize(getViewport().getScreenWidth()*1.5f,getViewport().getScreenHeight()*1.5f);
+        bg.setPosition(0,0);
         addActor(bg);
 
+        bg.setZIndex(1);
         platformActor.setZIndex(3);
         androidActor.setZIndex(2);
-        bg.setZIndex(1);
+
+        sound.play();
+        sound.setVolume(0.4f);
+        sound.setLooping(true);
 
 
         btnOn = new MyButton("", game.btnOn());
@@ -70,6 +85,7 @@ public class GameStage extends MyStage {
 
     boolean removePlatformFromArrayList = false;
     PlatformActor removablePlatform = null;
+    boolean onPlatform = false;
 
     @Override
     public void init() {
@@ -80,19 +96,25 @@ public class GameStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
-
         if(androidActor!=null){
+
+
+
             androidActor.setSpeedX(4);
             //TODO: Majd megcsinálom szebbé by ifa
             if(Gdx.input.isKeyPressed(Input.Keys.UP)){
                 androidActor.up();
-            } else if(!(androidActor.getY()<100)) androidActor.down();
+            } else if(!onPlatform){
+                androidActor.down();
+            }
+            else androidActor.land();
 
-            setCameraMoveToXY(androidActor.getX()+200, 400);
+            setCameraMoveToXY(androidActor.getX(), androidActor.getY(), 1.5f);
+            if(bg!=null) bg.setPosition(getCameraMoveToX()-getViewport().getScreenWidth()/1.335f, getCameraMoveToY()-getViewport().getScreenHeight()/1.335f);
 
             Array<Actor> actors = getActors();
             ArrayList<Actor> deleteActor = new ArrayList<Actor>();
-
+            onPlatform=false;
             for(PlatformActor pa : platforms){
                 if(pa.getX()<androidActor.getX()-getViewport().getScreenWidth()*2) {
                     deleteActor.add(pa);

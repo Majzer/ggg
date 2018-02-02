@@ -86,17 +86,17 @@ public class Assets {
 	//---------------------------------------------------------------------------------------------------------
 
 	//Hangok
-	public static final AssetDescriptor<Sound> ThemeSound
-			=new AssetDescriptor<Sound>("sound/game_themesound.wav", Sound.class);
+	public static final AssetDescriptor<Music> ThemeSound
+			=new AssetDescriptor<Music>("sound/game_themesound.wav", Music.class);
 
-	public static final AssetDescriptor<Sound> MenuTheme
-			=new AssetDescriptor<Sound>("sound/mune_theme_sound.wav", Sound.class);
+	public static final AssetDescriptor<Music> MenuTheme
+			=new AssetDescriptor<Music>("sound/mune_theme_sound.wav", Music.class);
 
-	public static final AssetDescriptor<Sound> WindSound
-			=new AssetDescriptor<Sound>("sound/wind_sound_2.0.wav", Sound.class);
+	public static final AssetDescriptor<Music> WindSound
+			=new AssetDescriptor<Music>("sound/wind_sound_2.0.wav", Music.class);
 
-	public static final AssetDescriptor<Sound> FanSound
-			=new AssetDescriptor<Sound>("sound/mune_theme_sound.wav", Sound.class);
+	public static final AssetDescriptor<Music> FanSound
+			=new AssetDescriptor<Music>("sound/mune_theme_sound.wav", Music.class);
 	//---------------------------------------------------------------------------------------------------------
 
 	public static void prepare() {

@@ -12,7 +12,7 @@ public class AndroidActor extends OneSpriteAnimatedActor {
     private float speedX = 4, speedY = 0, fallingTime = 0;
     private boolean moveX = true;
     private int movingState = 0; //0-Séta, 1-Repülés, 2-Zuhanás
-    private final int GRAVITACIOS_GYORSULAS = 10;
+    private final int GRAVITACIOS_GYORSULAS = 20;
 
     public AndroidActor(TextureAtlas textureAtlas) {
         super(textureAtlas);
@@ -37,7 +37,7 @@ public class AndroidActor extends OneSpriteAnimatedActor {
                 speedY=0;
                 break;
             case 1://Repülés
-                speedY=2;
+                speedY=5;
                 break;
             case 2://Zuhanás
                 speedY= -GRAVITACIOS_GYORSULAS*fallingTime;
