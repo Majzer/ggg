@@ -31,11 +31,11 @@ public class AndroidActor extends OneSpriteAnimatedActor {
     }
 
     public void up(){
-        setY(getY()*1.02f);
+        setY(getY()+2);
     }
 
     public void down(){
-        setY(getY()/1.02f);
+        setY(getY()-4);
     }
 
     public int getSpeedY() {
