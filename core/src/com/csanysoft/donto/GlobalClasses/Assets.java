@@ -34,13 +34,6 @@ public class Assets {
 		fontParameter.fontParameters.color = Color.WHITE;
 	}
 
-	static final FreetypeFontLoader.FreeTypeFontLoaderParameter fontParameter_medieval = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
-	static {
-		fontParameter.fontFileName = "Augusta.ttf";
-		fontParameter.fontParameters.size = 30;
-		fontParameter.fontParameters.characters = CHARS;
-		fontParameter.fontParameters.color = Color.WHITE;
-	}
 
 	//Betútípus
 	public static final AssetDescriptor<BitmapFont> ARIAL_30_FONT
