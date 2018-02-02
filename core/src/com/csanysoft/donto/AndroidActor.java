@@ -1,6 +1,7 @@
 package com.csanysoft.donto;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.csanysoft.donto.GlobalClasses.Assets;
 import com.csanysoft.donto.MyBaseClasses.Scene2D.OneSpriteAnimatedActor;
 
 /**
@@ -14,9 +15,8 @@ public class AndroidActor extends OneSpriteAnimatedActor {
     private int movingState = 0; //0-Séta, 1-Repülés, 2-Zuhanás
     private final int GRAVITACIOS_GYORSULAS = 20;
 
-    public AndroidActor(TextureAtlas textureAtlas) {
-        super(textureAtlas);
-        setFps(24);
+    public AndroidActor() {
+        super(Assets.manager.get(Assets.WALK_TEXTURE));
     }
 
     @Override

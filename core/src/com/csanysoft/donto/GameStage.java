@@ -31,6 +31,7 @@ public class GameStage extends MyStage {
     ArrayList<PlatformActor> platforms = new ArrayList<PlatformActor>();
     PlatformActor platformActor;
     AndroidActor androidActor;
+    FanActor fanActor;
     Random rand = new Random();
     OneSpriteStaticActor bg;
     TextButton btnOn;
@@ -46,11 +47,13 @@ public class GameStage extends MyStage {
 
         // TODO: 2018. 02. 02. Ez piros volt valamiért
         sound = Assets.manager.get(Assets.ThemeSound);
-        fan = Assets.manager.get(Assets.FanSound);
+
 
         addActor(platformActor=new PlatformActor(i++,100));
+        addActor(fanActor = new FanActor());
+        fanActor.setY(-400);
         platforms.add(platformActor);
-        addActor(androidActor=new AndroidActor(Assets.manager.get(Assets.WALK_TEXTURE)));
+        addActor(androidActor=new AndroidActor());
         androidActor.setPosition(platformActor.getX(),platformActor.getY()+platformActor.getHeight()+20);
         for(;i < 11; i++) {
             addActor(platformActor=new PlatformActor(i*1000,rand.nextInt(500)+100));
@@ -100,20 +103,17 @@ public class GameStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
 
+        fanActor.setX(androidActor.getX());
+
         if(androidActor!=null){
-
-
-
             androidActor.setSpeedX(4);
             //TODO: Majd megcsinálom szebbé by ifa
             if(Gdx.input.isKeyPressed(Input.Keys.UP)){
                 androidActor.up();
-                fan.play();
-                fan.setLooping(true);
-                fan.setVolume(0.5f);
+                fanActor.turnOn();
             } else if(!onPlatform){
                 androidActor.down();
-                fan.pause();
+                fanActor.turnOff();
             }
             else androidActor.land();
 
