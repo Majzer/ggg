@@ -2,6 +2,7 @@ package com.csanysoft.donto;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.csanysoft.donto.GlobalClasses.Assets;
 import com.csanysoft.donto.MyBaseClasses.Scene2D.MyStage;
+import com.csanysoft.donto.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 import java.lang.reflect.AccessibleObject;
 import java.util.ArrayList;
@@ -26,12 +28,16 @@ public class GameStage extends MyStage {
     PlatformActor platformActor;
     AndroidActor androidActor;
     Random rand = new Random();
+    OneSpriteStaticActor bg;
     TextButton btnOn;
     int i=0;
 
 
     public GameStage(Viewport viewport, Batch batch, Donto game) {
         super(viewport, batch, game);
+        platformActor.setZIndex(3);
+        androidActor.setZIndex(2);
+        bg.setZIndex(1);
         addActor(platformActor=new PlatformActor(i++,100));
         addActor(androidActor=new AndroidActor(Assets.manager.get(Assets.WALK_TEXTURE)));
         androidActor.setPosition(platformActor.getX(),platformActor.getY()+platformActor.getHeight()-8);
@@ -39,6 +45,13 @@ public class GameStage extends MyStage {
             addActor(platformActor=new PlatformActor(i*1000,rand.nextInt(500)+100));
             platforms.add(platformActor);
         }
+
+        bg = new OneSpriteStaticActor(Assets.manager.get(Assets.BACKGROUND_TEXTURE));
+        addActor(bg);
+
+        platformActor.setZIndex(3);
+        androidActor.setZIndex(2);
+        bg.setZIndex(1);
 
         // TODO: 2018. 02. 02.  kommentet kitörölni
         //btnOn = new MyButton("", game.btnOn());
