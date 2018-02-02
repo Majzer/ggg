@@ -89,6 +89,7 @@ public class GameStage extends MyStage {
             if(Gdx.input.isKeyPressed(Input.Keys.UP)){
                 androidActor.up();
             } else if(!onPlatform) androidActor.down();
+            else androidActor.land();
 
             setCameraMoveToXY(androidActor.getX()+200, 400);
 
