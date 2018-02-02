@@ -3,6 +3,9 @@ Z indexek tartsuk nyílván mert megbolondulunk este!!!
 Háttér: 1
 Platform: 2
 android actor: 2
+helphand: 4
+fanactor: 5
+windactor: 5
 
 Menü:
 háttér: 1
