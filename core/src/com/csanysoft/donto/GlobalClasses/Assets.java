@@ -45,6 +45,9 @@ public class Assets {
 	//Texturák
 	public static final AssetDescriptor<Texture> PLATFORM1_TEXTURE
 			= new AssetDescriptor<Texture>("platforms/platform1.png", Texture.class);
+
+	public static final AssetDescriptor<Texture> BACKGROUND_TEXTURE
+			= new AssetDescriptor<Texture>("background.png", Texture.class);
 	//---------------------------------------------------------------------------------------------------------
 
 	//Animált dolgok
@@ -109,6 +112,7 @@ public class Assets {
 
 		//Texturák
 		manager.load(PLATFORM1_TEXTURE);
+		manager.load(BACKGROUND_TEXTURE);
 
 
 		//Animált texturák atlaszai
