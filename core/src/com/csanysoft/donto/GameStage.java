@@ -36,6 +36,8 @@ public class GameStage extends MyStage {
     TextButton btnOn;
     int i=0;
     Music sound;
+    Music fan;
+
 
 
     public GameStage(Viewport viewport, Batch batch, Donto game) {
@@ -49,6 +51,7 @@ public class GameStage extends MyStage {
 
         // TODO: 2018. 02. 02. Ez piros volt valamiért
         sound = Assets.manager.get(Assets.ThemeSound);
+        fan = Assets.manager.get(Assets.FanSound);
 
         addActor(platformActor=new PlatformActor(i++,100));
         platforms.add(platformActor);
@@ -72,9 +75,9 @@ public class GameStage extends MyStage {
 
 
         setDebugAll(true);
+        /*
+
         btnOn = new MyButton("", game.btnOn());
-
-
         btnOn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -82,7 +85,7 @@ public class GameStage extends MyStage {
             }
         });
         addActor(btnOn);
-
+        */
     setDebugAll(true);
     }
 
@@ -101,6 +104,7 @@ public class GameStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
+
         if(androidActor!=null){
         if(elapsedTime-elapsedTimeForAndroidActor>10){
             androidActor.setFps(androidActor.getFps()+1);
@@ -113,8 +117,12 @@ public class GameStage extends MyStage {
             //TODO: Majd megcsinálom szebbé by ifa
             if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isTouched()){
                 androidActor.up();
+                fan.play();
+                fan.setLooping(true);
+                fan.setVolume(0.5f);
             } else if(!onPlatform){
                 androidActor.down();
+                fan.pause();
             }
             else androidActor.land();
 
