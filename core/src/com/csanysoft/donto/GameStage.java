@@ -17,6 +17,8 @@ import com.csanysoft.donto.MyBaseClasses.Scene2D.MyButton;
 import com.csanysoft.donto.MyBaseClasses.Scene2D.MyStage;
 import com.csanysoft.donto.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import com.csanysoft.donto.MyBaseClasses.Scene2D.ShapeType;
+import com.csanysoft.donto.MyBaseClasses.WindActor;
+import com.sun.org.apache.xpath.internal.operations.And;
 
 import java.lang.reflect.AccessibleObject;
 import java.util.ArrayList;
@@ -31,6 +33,7 @@ public class GameStage extends MyStage {
     ArrayList<PlatformActor> platforms = new ArrayList<PlatformActor>();
     PlatformActor platformActor;
     AndroidActor androidActor;
+    WindActor windActor;
     FanActor fanActor;
     HelpHandActor helpHand;
     Random rand = new Random();
@@ -61,6 +64,9 @@ public class GameStage extends MyStage {
         addActor(androidActor=new AndroidActor());
         androidActor.setPosition(platformActor.getX(),platformActor.getY()+platformActor.getHeight()+20);
         platformActor.setZIndex(3);
+        addActor(windActor = new WindActor());
+        windActor.setZIndex(5);
+        windActor.setY(fanActor.getY()+100);
         for(;i < 11; i++) {
             addActor(platformActor=new PlatformActor(i*1100 + rand.nextInt(500),rand.nextInt(500)+100));
             platformActor.setZIndex(3);
@@ -111,12 +117,12 @@ public class GameStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
 
+        windActor.setX(androidActor.getX());
+        windActor.setVisible(fanActor.isRunning());
+
 //        helpHand.setPosition(androidActor.getX(), androidActor.getY());
         //helpHand.setSize(getWidth() + (float)Math.cos(elapsedTime*10)/40, getHeight() + (float)Math.sin(elapsedTime*10)/40);
         fanActor.setX(androidActor.getX());
-
-
-
 
         if(androidActor!=null){
         if(elapsedTime-elapsedTimeForAndroidActor>10){
@@ -130,7 +136,7 @@ public class GameStage extends MyStage {
             if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isTouched()){
                 androidActor.up();
                 fanActor.turnOn();
-//                helpHand.setVisible(false);
+                //helpHand.setVisible(false);
             } else if(!onPlatform){
                 androidActor.down();
                 fanActor.turnOff();

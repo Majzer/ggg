@@ -17,6 +17,7 @@ public class FanActor extends OneSpriteAnimatedActor {
     public FanActor() {
         super(Assets.manager.get(Assets.BLOWER_TEXTURE));
         fanMusic.setVolume(0.4f);
+
     }
 
     @Override
@@ -39,5 +40,9 @@ public class FanActor extends OneSpriteAnimatedActor {
 
     public void turnOff(){
         isRunning = false;
+    }
+
+    public boolean isRunning() {
+        return isRunning;
     }
 }
