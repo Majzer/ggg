@@ -104,8 +104,6 @@ public class Assets {
 	public static final AssetDescriptor<Music> MenuTheme
 			=new AssetDescriptor<Music>("sound/mune_theme_sound.wav", Music.class);
 
-	public static final AssetDescriptor<Music> WindSound
-			=new AssetDescriptor<Music>("sound/wind_sound_2.0.wav", Music.class);
 
 	public static final AssetDescriptor<Music> FanSound
 			=new AssetDescriptor<Music>("sound/fan_sound.wav", Music.class);
@@ -162,7 +160,7 @@ public class Assets {
 		//Hangok
 		manager.load(ThemeSound);
 		manager.load(MenuTheme);
-		manager.load(WindSound);
+
 		manager.load(FanSound);
 		manager.load(WalkSound);
 	}
