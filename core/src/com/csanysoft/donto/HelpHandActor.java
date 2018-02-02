@@ -13,15 +13,14 @@ public class HelpHandActor extends OneSpriteStaticActor {
 
     GameStage gameStage;
 
-    public HelpHandActor(float x, float y, GameStage gameStage) {
+    public HelpHandActor(float x, float y) {
         super(Assets.manager.get(Assets.HELP_HAND_TEXTURE));
-        setSize(1 ,1);
-        setPosition(x - getWidth()/2 , y - getHeight()/2);
-        this.gameStage = gameStage;
+        setPosition(x,y);
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
+        setSize(getWidth() + (float)Math.cos(elapsedTime*10)*2, getHeight() + (float)Math.sin(elapsedTime*10)*2);
     }
 }
