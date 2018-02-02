@@ -46,14 +46,9 @@ public class Assets {
 	public static final AssetDescriptor<BitmapFont> ARIAL_30_FONT
 			= new AssetDescriptor<BitmapFont>(fontParameter.fontFileName, BitmapFont.class, fontParameter);
 
-	public static final AssetDescriptor<BitmapFont> MEDIEVAL_30_FONT
-			= new AssetDescriptor<BitmapFont>(fontParameter.fontFileName, BitmapFont.class, fontParameter_medieval);
-
 	//Texturák
 	public static final AssetDescriptor<Texture> PLATFORM1_TEXTURE
 			= new AssetDescriptor<Texture>("platforms/platform1.png", Texture.class);
-
-
 
 	//Android bábú
 	public static final AssetDescriptor<TextureAtlas> WALK_TEXTURE
@@ -80,7 +75,6 @@ public class Assets {
 
 
 		manager.load(ARIAL_30_FONT);
-		manager.load(MEDIEVAL_30_FONT);
 		// TODO: 2018. 02. 02. itt van a háttér loadja
 		//manager.load(BACKGROUND_TEXTURE);
 
