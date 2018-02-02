@@ -13,6 +13,7 @@ public class Donto extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+		System.out.println("uisadfdhwei");
 		img = new Texture("badlogic.jpg");
 	}
 
