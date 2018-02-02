@@ -12,6 +12,7 @@ import com.csanysoft.donto.MyBaseClasses.Scene2D.OneSpriteAnimatedActor;
 public class FanActor extends OneSpriteAnimatedActor {
     private boolean isRunning = false;
     private Music fanMusic = Assets.manager.get(Assets.FanSound);
+    float ido;
 
 
     public FanActor() {
