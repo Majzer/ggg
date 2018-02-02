@@ -168,7 +168,10 @@ public class GameStage extends MyStage {
             }
 
             setCameraMoveToXY(androidActor.getX(), androidActor.getY(), 1.5f);
-            if(bg!=null) bg.setPosition(getCameraMoveToX()-getViewport().getScreenWidth()/1.335f, getCameraMoveToY()-getViewport().getScreenHeight()/1.335f);
+            if(bg!=null){
+                bg.setPosition(getCameraMoveToX()-getViewport().getScreenWidth()+40, getCameraMoveToY()-getViewport().getScreenHeight());
+                bg.setSize(getViewport().getScreenWidth()*2f, getViewport().getScreenHeight()*2f);
+            }
 
             Array<Actor> actors = getActors();
             ArrayList<Actor> deleteActor = new ArrayList<Actor>();
