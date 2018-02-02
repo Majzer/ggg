@@ -62,7 +62,7 @@ public class MenuStage extends MyStage {
         });
         addActor(btnExit);
 
-        btnStart.setPosition(getViewport().getScreenWidth()/2, getViewport().getWorldHeight()/2);
+        btnStart.setPosition(getViewport().getScreenWidth()/2-100, getViewport().getWorldHeight()/2);
         btnExit.setPosition(btnStart.getX() , btnStart.getY()-btnExit.getHeight()-50);
 
     }
