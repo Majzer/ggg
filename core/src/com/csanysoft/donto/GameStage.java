@@ -153,17 +153,25 @@ public class GameStage extends MyStage {
                         fanActor.ido = elapsedTime;
                         egyszer = false;
                     }
-                    if (elapsedTime - fanActor.ido > 2) {
+                    if (elapsedTime - fanActor.ido > 5) {
+                        System.out.println("most");
                         mehetFel = false;
+                        androidActor.down();
+                        fanActor.turnOff();
+                        for(WindActor windActor : winds){
+                            windActor.setVisible(false);
+                        }
+                        //androidActor.land();
+                    } else {
+                        androidActor.up();
+                        fanActor.turnOn();
+                        for (WindActor windActor : winds) {
+                            windActor.setVisible(true);
+                            windActor.setPosition(fanActor.getX() + rand.nextInt((int) fanActor.getWidth()), fanActor.getY() + fanActor.getHeight() + rand.nextInt(getViewport().getScreenHeight()));
+                        }
+                        walk.pause();
+                        helpHand.setVisible(false);
                     }
-                    androidActor.up();
-                    fanActor.turnOn();
-                    for (WindActor windActor : winds) {
-                        windActor.setVisible(true);
-                        windActor.setPosition(fanActor.getX() + rand.nextInt((int) fanActor.getWidth()), fanActor.getY() + fanActor.getHeight() + rand.nextInt(getViewport().getScreenHeight()));
-                    }
-                    walk.pause();
-                    helpHand.setVisible(false);
                 }
             } else if(!onPlatform){
                 androidActor.down();
