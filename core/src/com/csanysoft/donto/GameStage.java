@@ -3,6 +3,8 @@ package com.csanysoft.donto;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetDescriptor;
+import com.badlogic.gdx.audio.Music;
+
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -32,10 +34,17 @@ public class GameStage extends MyStage {
     OneSpriteStaticActor bg;
     TextButton btnOn;
     int i=0;
+    Music sound;
 
 
     public GameStage(Viewport viewport, Batch batch, Donto game) {
         super(viewport, batch, game);
+
+
+
+
+        sound = Assets.manager.get(Assets.ThemeSound);
+
         addActor(platformActor=new PlatformActor(i++,100));
         platforms.add(platformActor);
         platformActor.setZIndex(3);
@@ -53,19 +62,13 @@ public class GameStage extends MyStage {
         addActor(bg);
         bg.setZIndex(1);
         androidActor.setZIndex(2);
+        platformActor.setZIndex(3);
+        androidActor.setZIndex(2);
+        sound.play();
+        sound.setVolume(0.4f);
+        sound.setLooping(true);
 
-        // TODO: 2018. 02. 02.  kommentet kitörölni
-        //btnOn = new MyButton("", game.btnOn());
-        /*
 
-        btnOn.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-            }
-        });
-        addActor(btnOn);
-        */
     setDebugAll(true);
     }
 
