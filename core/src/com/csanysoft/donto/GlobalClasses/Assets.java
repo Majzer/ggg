@@ -40,12 +40,15 @@ public class Assets {
 	//Betútípus
 	public static final AssetDescriptor<BitmapFont> ARIAL_30_FONT
 			= new AssetDescriptor<BitmapFont>(fontParameter.fontFileName, BitmapFont.class, fontParameter);
+	//---------------------------------------------------------------------------------------------------------
 
 	//Texturák
 	public static final AssetDescriptor<Texture> PLATFORM1_TEXTURE
 			= new AssetDescriptor<Texture>("platforms/platform1.png", Texture.class);
+	//---------------------------------------------------------------------------------------------------------
 
 	//Animált dolgok
+
 	//Android bábú
 	public static final AssetDescriptor<TextureAtlas> WALK_TEXTURE
 			= new AssetDescriptor<TextureAtlas>("android/walk.atlas", TextureAtlas.class);
@@ -57,6 +60,15 @@ public class Assets {
 	//Szél
 	public static final AssetDescriptor<TextureAtlas> WIND_TEXTURE
 			= new AssetDescriptor<TextureAtlas>("wind/winding.atlas", TextureAtlas.class);
+	//---------------------------------------------------------------------------------------------------------
+
+	//Gomb texturák
+	public static final AssetDescriptor<Texture> BTN_ON_BUTTON_TEXTURE
+			= new AssetDescriptor<Texture>("on_button/on_button.png", Texture.class);
+
+	public static final AssetDescriptor<Texture> BTN_ON_BUTTON_DOWN_TEXTURE
+			= new AssetDescriptor<Texture>("on_button/on_button_down.png", Texture.class);
+	//---------------------------------------------------------------------------------------------------------
 
 	//Hangok
 	public static final AssetDescriptor<Sound> ThemeSound
@@ -70,6 +82,7 @@ public class Assets {
 
 	public static final AssetDescriptor<Sound> FanSound
 			=new AssetDescriptor<Sound>("sound/mune_theme_sound.wav", Sound.class);
+	//---------------------------------------------------------------------------------------------------------
 
 	public static void prepare() {
 		manager = new AssetManager();
@@ -102,6 +115,10 @@ public class Assets {
 		manager.load(WALK_TEXTURE);
 		manager.load(BLOWER_TEXTURE);
 		manager.load(WIND_TEXTURE);
+
+		//Gombok
+		manager.load(BTN_ON_BUTTON_TEXTURE);
+		manager.load(BTN_ON_BUTTON_DOWN_TEXTURE);
 
 		//Hangok
 		manager.load(ThemeSound);
