@@ -55,6 +55,7 @@ public class GameStage extends MyStage {
         bg.setZIndex(1);
 
         sound = Assets.manager.get(Assets.ThemeSound);
+        walk = Assets.manager.get(Assets.WalkSound);
 
 
         addActor(platformActor=new PlatformActor(i++,100));
@@ -151,6 +152,7 @@ public class GameStage extends MyStage {
                     windActor.setVisible(true);
                     windActor.setPosition(fanActor.getX()+rand.nextInt((int)fanActor.getWidth()), fanActor.getY()+fanActor.getHeight()+rand.nextInt(getViewport().getScreenHeight()));
                 }
+                walk.pause();
                 helpHand.setVisible(false);
             } else if(!onPlatform){
                 androidActor.down();
@@ -158,8 +160,14 @@ public class GameStage extends MyStage {
                 for(WindActor windActor : winds){
                     windActor.setVisible(false);
                 }
+                walk.pause();
             }
-            else androidActor.land();
+            else {
+                androidActor.land();
+                walk.play();
+                walk.setVolume(0.4f);
+                walk.setLooping(true);
+            }
 
             setCameraMoveToXY(androidActor.getX(), androidActor.getY(), 1.5f);
             if(bg!=null) bg.setPosition(getCameraMoveToX()-getViewport().getScreenWidth()/1.335f, getCameraMoveToY()-getViewport().getScreenHeight()/1.335f);
@@ -210,14 +218,9 @@ public class GameStage extends MyStage {
         }
 
 
-        /*if (androidActor.getY() > 800) {
-            if(rand.nextBoolean()) {
-                androidActor.setPosition(rand.nextInt()+10, rand.nextInt()-10);
-            } else {
-                androidActor.setPosition(rand.nextInt()-10, rand.nextInt()+10);
-            }
-
-        }*/
+        if (androidActor.getY() < -200) {
+            game.setScreen(new MenuScreen(game));
+        }
     }
 }
 
