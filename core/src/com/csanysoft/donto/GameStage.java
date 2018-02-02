@@ -38,6 +38,7 @@ public class GameStage extends MyStage {
     TextButton btnOn;
     int i=0;
     Music sound;
+    Music walk;
 
 
 
@@ -51,6 +52,7 @@ public class GameStage extends MyStage {
         bg.setZIndex(1);
 
         sound = Assets.manager.get(Assets.ThemeSound);
+        walk = Assets.manager.get(Assets.WalkSound);
 
 
         addActor(platformActor=new PlatformActor(i++,100));
@@ -130,12 +132,19 @@ public class GameStage extends MyStage {
             if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isTouched()){
                 androidActor.up();
                 fanActor.turnOn();
+                walk.pause();
                 helpHand.setVisible(false);
             } else if(!onPlatform){
                 androidActor.down();
                 fanActor.turnOff();
+                walk.pause();
             }
-            else androidActor.land();
+            else {
+                androidActor.land();
+                walk.play();
+                walk.setVolume(0.4f);
+                walk.setLooping(true);
+            }
 
             setCameraMoveToXY(androidActor.getX(), androidActor.getY(), 1.5f);
             if(bg!=null) bg.setPosition(getCameraMoveToX()-getViewport().getScreenWidth()/1.335f, getCameraMoveToY()-getViewport().getScreenHeight()/1.335f);

@@ -106,6 +106,9 @@ public class Assets {
 
 	public static final AssetDescriptor<Music> FanSound
 			=new AssetDescriptor<Music>("sound/fan_sound.wav", Music.class);
+
+	public static final AssetDescriptor<Music> WalkSound
+			=new AssetDescriptor<Music>("sound/walk_sound.wav", Music.class);
 	//---------------------------------------------------------------------------------------------------------
 
 	public static void prepare() {
@@ -157,6 +160,7 @@ public class Assets {
 		manager.load(MenuTheme);
 		manager.load(WindSound);
 		manager.load(FanSound);
+		manager.load(WalkSound);
 	}
 
     public static void afterLoaded() {
