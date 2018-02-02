@@ -196,14 +196,9 @@ public class GameStage extends MyStage {
         }
 
 
-        /*if (androidActor.getY() > 800) {
-            if(rand.nextBoolean()) {
-                androidActor.setPosition(rand.nextInt()+10, rand.nextInt()-10);
-            } else {
-                androidActor.setPosition(rand.nextInt()-10, rand.nextInt()+10);
-            }
-
-        }*/
+        if (androidActor.getY() < -200) {
+            game.setScreen(new MenuScreen(game));
+        }
     }
 }
 
