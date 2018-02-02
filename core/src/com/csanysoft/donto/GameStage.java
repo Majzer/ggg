@@ -40,7 +40,12 @@ public class GameStage extends MyStage {
 
     public GameStage(Viewport viewport, Batch batch, Donto game) {
         super(viewport, batch, game);
+        bg = new OneSpriteStaticActor(Assets.manager.get(Assets.BACKGROUND_TEXTURE));
+        bg.setSize(getViewport().getScreenWidth()*1.5f,getViewport().getScreenHeight()*1.5f);
+        bg.setPosition(0,0);
+        addActor(bg);
 
+        bg.setZIndex(1);
 
         // TODO: 2018. 02. 02. Ez piros volt valamiért
         sound = Assets.manager.get(Assets.ThemeSound);
@@ -49,18 +54,14 @@ public class GameStage extends MyStage {
         platforms.add(platformActor);
         addActor(androidActor=new AndroidActor(Assets.manager.get(Assets.WALK_TEXTURE)));
         androidActor.setPosition(platformActor.getX(),platformActor.getY()+platformActor.getHeight()+20);
+        platformActor.setZIndex(3);
         for(;i < 11; i++) {
-            addActor(platformActor=new PlatformActor(i*1000,rand.nextInt(500)+100));
+            addActor(platformActor=new PlatformActor(i*1000 + rand.nextInt(500),rand.nextInt(500)+100));
             platformActor.setZIndex(3);
             platforms.add(platformActor);
-        }
+    }
 
-        bg = new OneSpriteStaticActor(Assets.manager.get(Assets.BACKGROUND_TEXTURE));
-        bg.setSize(getViewport().getScreenWidth()*1.5f,getViewport().getScreenHeight()*1.5f);
-        bg.setPosition(0,0);
-        addActor(bg);
 
-        bg.setZIndex(1);
         platformActor.setZIndex(3);
         androidActor.setZIndex(2);
 
@@ -70,6 +71,7 @@ public class GameStage extends MyStage {
         sound.setLooping(true);
 
 
+        setDebugAll(true);
         btnOn = new MyButton("", game.btnOn());
 
 
@@ -87,6 +89,8 @@ public class GameStage extends MyStage {
     boolean removePlatformFromArrayList = false;
     PlatformActor removablePlatform = null;
     boolean onPlatform = false;
+    float elapsedTimeForAndroidActor=0;
+    float baseSpeed=4;
 
     @Override
     public void init() {
@@ -98,12 +102,16 @@ public class GameStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
         if(androidActor!=null){
+        if(elapsedTime-elapsedTimeForAndroidActor>10){
+            androidActor.setFps(androidActor.getFps()+1);
+            baseSpeed++;
+            elapsedTimeForAndroidActor=elapsedTime;
+        }
 
 
-
-            androidActor.setSpeedX(4);
+            androidActor.setSpeedX(baseSpeed);
             //TODO: Majd megcsinálom szebbé by ifa
-            if(Gdx.input.isKeyPressed(Input.Keys.UP)){
+            if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isTouched()){
                 androidActor.up();
             } else if(!onPlatform){
                 androidActor.down();
@@ -119,22 +127,27 @@ public class GameStage extends MyStage {
             for(PlatformActor pa : platforms){
                 if(pa.getX()<androidActor.getX()-getViewport().getScreenWidth()*2) {
                     deleteActor.add(pa);
-                    addActor(platformActor=new PlatformActor(i*1000,rand.nextInt(500)+100));
+                    addActor(platformActor=new PlatformActor(i*1000 + rand.nextInt(500),rand.nextInt(500)+100));
                     removePlatformFromArrayList = true;
                     removablePlatform = pa;
                     i++;
                 }
 
                 if(androidActor.overlaps(ShapeType.Rectangle,pa)){
-                    System.out.println("Hozzáér");
-                    float aY = androidActor.getY();
+                    int aY = (int)androidActor.getY();
                     float paYH = pa.getY()+pa.getHeight();
-                    System.out.println(aY >= paYH-10);
-                    if(aY >= paYH-10 || aY >= paYH-11){
-                        androidActor.setY(paYH);
-                        System.out.println("teteje");
+                    if(aY < paYH && aY+androidActor.getHeight() > pa.getY()+10 && aY < paYH){
+                        System.out.println("oldalról");
+                        androidActor.setSpeedX(0);
                     }
-                    else if(aY < paYH && aY+androidActor.getHeight() > pa.getY())androidActor.setSpeedX(0);
+                    else if (aY+androidActor.getHeight() < pa.getY()+10){
+                        System.out.println("alulról");
+                        androidActor.setY(pa.getY()-androidActor.getHeight());
+                    }
+                    else{
+                        onPlatform = true;
+                        androidActor.setY(paYH);
+                    }
                 }
             }
 
@@ -147,18 +160,17 @@ public class GameStage extends MyStage {
             for (Actor a : deleteActor) {
                 actors.removeValue(a, true);
             }
-            setCameraMoveToXY(androidActor.getX(), androidActor.getY(), 1.5f);
         }
 
 
-        if(androidActor.getY() > 800) {
+        /*if (androidActor.getY() > 800) {
             if(rand.nextBoolean()) {
                 androidActor.setPosition(rand.nextInt()+10, rand.nextInt()-10);
             } else {
                 androidActor.setPosition(rand.nextInt()-10, rand.nextInt()+10);
             }
 
-        }
+        }*/
     }
 }
 
