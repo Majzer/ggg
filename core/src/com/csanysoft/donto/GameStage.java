@@ -43,6 +43,7 @@ public class GameStage extends MyStage {
     int i=0;
     Music sound;
     Music walk;
+    Music theme;
 
 
 
@@ -58,6 +59,9 @@ public class GameStage extends MyStage {
 
         sound = Assets.manager.get(Assets.ThemeSound);
         walk = Assets.manager.get(Assets.WalkSound);
+        theme = Assets.manager.get(Assets.MenuTheme);
+
+
         addActor(platformActor=new PlatformActor(i++,100));
         addActor(androidActor=new AndroidActor());
         androidActor.setPosition(platformActor.getX(),platformActor.getY()+platformActor.getHeight()+20);
@@ -90,7 +94,7 @@ public class GameStage extends MyStage {
         platformActor.setZIndex(3);
         androidActor.setZIndex(2);
         setDebugAll(true);
-
+        theme.pause();
         sound.play();
         sound.setVolume(0.4f);
         sound.setLooping(true);
