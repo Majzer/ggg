@@ -3,6 +3,9 @@ package com.csanysoft.donto;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.csanysoft.donto.GlobalClasses.Assets;
 import com.csanysoft.donto.MyBaseClasses.Scene2D.MyStage;
@@ -19,6 +22,7 @@ public class GameStage extends MyStage {
     ArrayList<PlatformActor> platforms = new ArrayList<PlatformActor>();
     PlatformActor platformActor;
     AndroidActor androidActor;
+    TextButton btnOn;
     int i=0;
 
 
@@ -32,6 +36,19 @@ public class GameStage extends MyStage {
             addActor(platformActor=new PlatformActor(i*1000,rand.nextInt(500)+100));
             platforms.add(platformActor);
         }
+
+        // TODO: 2018. 02. 02.  kommentet kitörölni
+        //btnOn = new MyButton("", game.btnOn());
+        /*
+
+        btnOn.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+            }
+        });
+        addActor(btnOn);
+        */
 
     }
 
