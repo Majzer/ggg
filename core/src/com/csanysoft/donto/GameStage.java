@@ -48,20 +48,19 @@ public class GameStage extends MyStage {
 
         addActor(platformActor=new PlatformActor(i++,100));
         platforms.add(platformActor);
+        platformActor.setZIndex(3);
         addActor(androidActor=new AndroidActor(Assets.manager.get(Assets.WALK_TEXTURE)));
         androidActor.setPosition(platformActor.getX(),platformActor.getY()+platformActor.getHeight()+20);
         for(;i < 11; i++) {
             addActor(platformActor=new PlatformActor(i*1000,rand.nextInt(500)+100));
+            platformActor.setZIndex(3);
             platforms.add(platformActor);
         }
 
         bg = new OneSpriteStaticActor(Assets.manager.get(Assets.BACKGROUND_TEXTURE));
         addActor(bg);
-
-
-        platformActor.setZIndex(3);
-        androidActor.setZIndex(2);
         bg.setZIndex(1);
+        androidActor.setZIndex(2);
 
         sound.play();
         sound.setVolume(0.4f);
@@ -97,11 +96,15 @@ public class GameStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
         if(androidActor!=null){
+
+            if(bg!=null) bg.setPosition(androidActor.getX()-200, androidActor.getY()-200);
+
             androidActor.setSpeedX(4);
             //TODO: Majd megcsinálom szebbé by ifa
             if(Gdx.input.isKeyPressed(Input.Keys.UP)){
                 androidActor.up();
             } else if(!onPlatform) androidActor.down();
+            else androidActor.land();
 
             setCameraMoveToXY(androidActor.getX()+200, 400);
 
@@ -133,6 +136,7 @@ public class GameStage extends MyStage {
 
             if(removePlatformFromArrayList){
                 platforms.add(platformActor);
+                platformActor.setZIndex(3);
                 platforms.remove(removablePlatform);
                 removePlatformFromArrayList=false;
             }
