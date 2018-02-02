@@ -1,6 +1,7 @@
 package com.csanysoft.donto.MyBaseClasses.Scene2D;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Rectangle;
@@ -28,6 +29,9 @@ abstract public class MyActor extends Actor implements InitableInterface {
     protected HashMap<String, MyShape> shapeMap;
 
     protected static float debugPointSize = 30f;
+
+    public MyActor(Texture texture) {
+    }
 
     public HashMap<String, MyShape> getCollisionShapeMap(){
         return shapeMap;

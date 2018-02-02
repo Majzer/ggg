@@ -57,8 +57,6 @@ public class GameStage extends MyStage {
 
         sound = Assets.manager.get(Assets.ThemeSound);
         walk = Assets.manager.get(Assets.WalkSound);
-
-
         addActor(platformActor=new PlatformActor(i++,100));
         addActor(androidActor=new AndroidActor());
         androidActor.setPosition(platformActor.getX(),platformActor.getY()+platformActor.getHeight()+20);
@@ -108,7 +106,7 @@ public class GameStage extends MyStage {
         });
         addActor(btnOn);
         */
-    setDebugAll(true);
+    //setDebugAll(true);
     }
 
     boolean removePlatformFromArrayList = false;
@@ -129,7 +127,6 @@ public class GameStage extends MyStage {
 
 //        helpHand.setPosition(androidActor.getX(), androidActor.getY());
         //helpHand.setSize(getWidth() + (float)Math.cos(elapsedTime*10)/40, getHeight() + (float)Math.sin(elapsedTime*10)/40);
-        fanActor.setX(androidActor.getX());
 
         helpHand.setPosition(androidActor.getX()+androidActor.getWidth()/2-40, androidActor.getY()+androidActor.getHeight()/2-35);
 
