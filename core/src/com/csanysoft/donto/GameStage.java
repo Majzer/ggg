@@ -39,6 +39,7 @@ public class GameStage extends MyStage {
 
         // TODO: 2018. 02. 02.  kommentet kitörölni
         //btnOn = new MyButton("", game.btnOn());
+        /*
 
         btnOn.addListener(new ClickListener(){
             @Override
@@ -47,7 +48,7 @@ public class GameStage extends MyStage {
             }
         });
         addActor(btnOn);
-
+        */
 
     }
 
