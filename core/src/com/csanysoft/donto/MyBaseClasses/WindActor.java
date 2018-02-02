@@ -10,7 +10,5 @@ import com.csanysoft.donto.MyBaseClasses.Scene2D.OneSpriteAnimatedActor;
 public class WindActor extends OneSpriteAnimatedActor {
     public WindActor() {
         super(Assets.manager.get(Assets.WIND_TEXTURE));
-        setFps(6);
-        setZIndex(5);
     }
 }

@@ -31,7 +31,11 @@ public class MenuStage extends MyStage {
     public MenuStage(Viewport viewport, Batch batch, Donto game) {
         super(viewport, batch, game);
         menu = Assets.manager.get(Assets.MenuTheme);
-
+        //bg = new OneSpriteStaticActor(Assets.manager.get(Assets.BACKGROUND_TEXTURE));
+       // bg.setSize(getViewport().getScreenWidth(),getViewport().getScreenHeight()*1.3f);
+       // bg.setPosition(0,0);
+       // bg.setZIndex(1);
+        //addActor(bg);
         menu.play();
         menu.setVolume(0.4f);
         menu.setLooping(true);
@@ -55,6 +59,7 @@ public class MenuStage extends MyStage {
                 game.setScreen(new MainScreen(game));
             }
         });
+        btnStart.setZIndex(2);
         addActor(btnStart);
 
         btnExit = new MyButton("", game.btnExit());
@@ -65,6 +70,7 @@ public class MenuStage extends MyStage {
                 Gdx.app.exit();
             }
         });
+        btnExit.setZIndex(2);
         addActor(btnExit);
 
         btnStart.setPosition(getViewport().getScreenWidth()/2-100, getViewport().getWorldHeight()/2);

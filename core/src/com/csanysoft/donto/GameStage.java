@@ -31,9 +31,10 @@ import java.util.Random;
 public class GameStage extends MyStage {
 
     ArrayList<PlatformActor> platforms = new ArrayList<PlatformActor>();
+    ArrayList<WindActor> winds = new ArrayList<WindActor>();
     PlatformActor platformActor;
     AndroidActor androidActor;
-    WindActor windActor;
+    WindActor windActor1, windActor2, windActor3, windActor4, windActor5;
     FanActor fanActor;
     HelpHandActor helpHand;
     Random rand = new Random();
@@ -60,12 +61,20 @@ public class GameStage extends MyStage {
         addActor(androidActor=new AndroidActor());
         androidActor.setPosition(platformActor.getX(),platformActor.getY()+platformActor.getHeight()+20);
         addActor(fanActor = new FanActor());
+        fanActor.setZIndex(5);
 
         platforms.add(platformActor);
         platformActor.setZIndex(3);
-        addActor(windActor = new WindActor());
-        windActor.setZIndex(5);
-        windActor.setY(fanActor.getY()+100);
+        winds.add(windActor1= new WindActor());
+        winds.add(windActor2= new WindActor());
+        winds.add(windActor3= new WindActor());
+        winds.add(windActor4= new WindActor());
+        winds.add(windActor5= new WindActor());
+        for(WindActor windActor : winds){
+            addActor(windActor);
+            windActor.setZIndex(5);
+            windActor.setVisible(false);
+        }
         for(;i < 11; i++) {
             addActor(platformActor=new PlatformActor(i*1100 + rand.nextInt(500),rand.nextInt(500)+100));
             platformActor.setZIndex(3);
@@ -115,7 +124,6 @@ public class GameStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
-        windActor.setVisible(fanActor.isRunning());
 
 //        helpHand.setPosition(androidActor.getX(), androidActor.getY());
         //helpHand.setSize(getWidth() + (float)Math.cos(elapsedTime*10)/40, getHeight() + (float)Math.sin(elapsedTime*10)/40);
@@ -133,17 +141,23 @@ public class GameStage extends MyStage {
             if(fanActor!=null){
                 fanActor.setY(androidActor.getY()-575);
                 fanActor.setX(androidActor.getX()-fanActor.getWidth()/2+androidActor.getWidth()/2);
-                windActor.setY(fanActor.getY()+100);
-                windActor.setX(fanActor.getX()+160);
             }
             androidActor.setSpeedX(baseSpeed);
             if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isTouched()){
                 androidActor.up();
                 fanActor.turnOn();
+
+                for(WindActor windActor : winds){
+                    windActor.setVisible(true);
+                    windActor.setPosition(fanActor.getX()+rand.nextInt((int)fanActor.getWidth()), fanActor.getY()+fanActor.getHeight()+rand.nextInt(getViewport().getScreenHeight()));
+                }
                 helpHand.setVisible(false);
             } else if(!onPlatform){
                 androidActor.down();
                 fanActor.turnOff();
+                for(WindActor windActor : winds){
+                    windActor.setVisible(false);
+                }
             }
             else androidActor.land();
 
