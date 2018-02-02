@@ -44,7 +44,7 @@ public class MenuStage extends MyStage {
         theme.setVolume(0.4f);
         theme.setLooping(true);
 
-        setDebugAll(true);
+        //setDebugAll(true);
     }
 
     @Override

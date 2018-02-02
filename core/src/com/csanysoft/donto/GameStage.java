@@ -47,6 +47,7 @@ public class GameStage extends MyStage {
 
 
 
+
     public GameStage(Viewport viewport, Batch batch, Donto game) {
         super(viewport, batch, game);
         bg = new OneSpriteStaticActor(Assets.manager.get(Assets.BACKGROUND_TEXTURE));
@@ -110,7 +111,7 @@ public class GameStage extends MyStage {
         });
         addActor(btnOn);
         */
-    setDebugAll(true);
+    //setDebugAll(true);
     }
 
     boolean removePlatformFromArrayList = false;
@@ -118,6 +119,9 @@ public class GameStage extends MyStage {
     boolean onPlatform = false;
     float elapsedTimeForAndroidActor=0;
     float baseSpeed=4;
+    float first = 10000;
+    boolean egyszer = true;
+    boolean mehetFel = true;
 
     @Override
     public void init() {
@@ -131,7 +135,6 @@ public class GameStage extends MyStage {
 
 //        helpHand.setPosition(androidActor.getX(), androidActor.getY());
         //helpHand.setSize(getWidth() + (float)Math.cos(elapsedTime*10)/40, getHeight() + (float)Math.sin(elapsedTime*10)/40);
-        fanActor.setX(androidActor.getX());
 
         helpHand.setPosition(androidActor.getX()+androidActor.getWidth()/2-40, androidActor.getY()+androidActor.getHeight()/2-35);
 
@@ -147,19 +150,30 @@ public class GameStage extends MyStage {
                 fanActor.setX(androidActor.getX()-fanActor.getWidth()/2+androidActor.getWidth()/2);
             }
             androidActor.setSpeedX(baseSpeed);
-            if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isTouched()){
-                androidActor.up();
-                fanActor.turnOn();
 
-                for(WindActor windActor : winds){
-                    windActor.setVisible(true);
-                    windActor.setPosition(fanActor.getX()+rand.nextInt((int)fanActor.getWidth()), fanActor.getY()+fanActor.getHeight()+rand.nextInt(getViewport().getScreenHeight()));
+            if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isTouched()){
+                if(mehetFel) {
+                    if (egyszer) {
+                        fanActor.ido = elapsedTime;
+                        egyszer = false;
+                    }
+                    if (elapsedTime - fanActor.ido > 2) {
+                        mehetFel = false;
+                    }
+                    androidActor.up();
+                    fanActor.turnOn();
+                    for (WindActor windActor : winds) {
+                        windActor.setVisible(true);
+                        windActor.setPosition(fanActor.getX() + rand.nextInt((int) fanActor.getWidth()), fanActor.getY() + fanActor.getHeight() + rand.nextInt(getViewport().getScreenHeight()));
+                    }
+                    walk.pause();
+                    helpHand.setVisible(false);
                 }
-                walk.pause();
-                helpHand.setVisible(false);
             } else if(!onPlatform){
                 androidActor.down();
                 fanActor.turnOff();
+                egyszer = true;
+                mehetFel=true;
                 for(WindActor windActor : winds){
                     windActor.setVisible(false);
                 }
@@ -214,6 +228,7 @@ public class GameStage extends MyStage {
 
             if(removePlatformFromArrayList){
                 platforms.add(platformActor);
+                platformActor.setZIndex(4);
                 platforms.remove(removablePlatform);
                 removePlatformFromArrayList=false;
             }
