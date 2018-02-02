@@ -118,6 +118,8 @@ public class GameStage extends MyStage {
     float first = 10000;
     boolean egyszer = true;
     boolean mehetFel = true;
+    boolean mehetFel2 = true;
+
 
     @Override
     public void init() {
@@ -153,8 +155,7 @@ public class GameStage extends MyStage {
                         fanActor.ido = elapsedTime;
                         egyszer = false;
                     }
-                    if (elapsedTime - fanActor.ido > 5) {
-                        System.out.println("most");
+                    if (elapsedTime - fanActor.ido > 3) {
                         mehetFel = false;
                         androidActor.down();
                         fanActor.turnOff();
@@ -163,27 +164,32 @@ public class GameStage extends MyStage {
                         }
                         //androidActor.land();
                     } else {
-                        androidActor.up();
-                        fanActor.turnOn();
-                        for (WindActor windActor : winds) {
-                            windActor.setVisible(true);
-                            windActor.setPosition(fanActor.getX() + rand.nextInt((int) fanActor.getWidth()), fanActor.getY() + fanActor.getHeight() + rand.nextInt(getViewport().getScreenHeight()));
+                        if(mehetFel2){
+                            androidActor.up();
+                            fanActor.turnOn();
+                            for (WindActor windActor : winds) {
+                                windActor.setVisible(true);
+                                windActor.setPosition(fanActor.getX() + rand.nextInt((int) fanActor.getWidth()), fanActor.getY() + fanActor.getHeight() + rand.nextInt(getViewport().getScreenHeight()));
+                            }
+                            walk.pause();
+                            helpHand.setVisible(false);
                         }
-                        walk.pause();
-                        helpHand.setVisible(false);
+
                     }
                 }
             } else if(!onPlatform){
                 androidActor.down();
                 fanActor.turnOff();
+                mehetFel2=false;
                 egyszer = true;
-                mehetFel=true;
                 for(WindActor windActor : winds){
                     windActor.setVisible(false);
                 }
                 walk.pause();
             }
             else {
+                mehetFel=true;
+                mehetFel2=true;
                 androidActor.land();
                 walk.play();
                 walk.setVolume(0.4f);
