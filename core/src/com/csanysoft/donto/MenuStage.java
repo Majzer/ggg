@@ -41,7 +41,7 @@ public class MenuStage extends MyStage {
         menu = Assets.manager.get(Assets.ThemeSound);
         menu.pause();
         theme.play();
-        theme.setVolume(0.4f);
+        theme.setVolume(0.8f);
         theme.setLooping(true);
 
         //setDebugAll(true);

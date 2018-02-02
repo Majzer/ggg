@@ -17,7 +17,7 @@ public class FanActor extends OneSpriteAnimatedActor {
 
     public FanActor() {
         super(Assets.manager.get(Assets.BLOWER_TEXTURE));
-        fanMusic.setVolume(0.6f);
+        fanMusic.setVolume(1.2f);
         fanMusic.setLooping(false);
         setZIndex(5);
     }
