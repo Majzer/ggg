@@ -2,12 +2,14 @@ package com.csanysoft.donto.DemoLoading;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.csanysoft.donto.Donto;
 import com.csanysoft.donto.Donto;
 import com.csanysoft.donto.GlobalClasses.*;
 import com.csanysoft.donto.MainScreen;
 import com.csanysoft.donto.MenuScreen;
 import com.csanysoft.donto.MyBaseClasses.Scene2D.MyScreen;
+import com.csanysoft.donto.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 
 public class LoadingScreen extends MyScreen {
@@ -18,7 +20,14 @@ public class LoadingScreen extends MyScreen {
     }
 	BitmapFont bitmapFont = new BitmapFont();
 
-    @Override
+
+	public LoadingScreen(Donto game, BitmapFont bitmapFont) {
+		super(game);
+		this.bitmapFont = bitmapFont;
+
+	}
+
+	@Override
 	public void show() {
 	    Assets.manager.finishLoading();
 		Assets.load();
@@ -27,15 +36,16 @@ public class LoadingScreen extends MyScreen {
 	@Override
 	public void render(float delta) {
 		super.render(delta);
-
 		spriteBatch.begin();
 		bitmapFont.draw(spriteBatch,"Loading: " + Assets.manager.getLoadedAssets() + "/" + (Assets.manager.getQueuedAssets()+ Assets.manager.getLoadedAssets()) + " (" + ((int)(Assets.manager.getProgress()*100f)) + "%)", Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
 		spriteBatch.end();
 		if (Assets.manager.update()) {
 			Assets.afterLoaded();
-			game.setScreen(new MenuScreen(game));
+			game.setScreen(new PenlogoScreen(game));
 		}
 	}
+
+
 
 
 	@Override

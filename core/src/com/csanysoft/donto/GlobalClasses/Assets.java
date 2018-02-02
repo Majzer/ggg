@@ -48,6 +48,15 @@ public class Assets {
 
 	public static final AssetDescriptor<Texture> BACKGROUND_TEXTURE
 			= new AssetDescriptor<Texture>("background.png", Texture.class);
+
+	public static final AssetDescriptor<Texture> PENLOGO_TEXTURE
+			= new AssetDescriptor<Texture>("penlogo.png", Texture.class);
+
+	public static final AssetDescriptor<Texture> WHITE_RECTANGLE_TEXTURE
+			= new AssetDescriptor<Texture>("white_rectangle.png", Texture.class);
+
+	public static final AssetDescriptor<Texture> HELP_HAND_TEXTURE
+			= new AssetDescriptor<Texture>("help_hand.png", Texture.class);
 	//---------------------------------------------------------------------------------------------------------
 
 	//Animált dolgok
@@ -58,7 +67,7 @@ public class Assets {
 
 	//Ventilátor
 	public static final AssetDescriptor<TextureAtlas> BLOWER_TEXTURE
-			= new AssetDescriptor<TextureAtlas>("blower/rotate.atlas", TextureAtlas.class);
+			= new AssetDescriptor<TextureAtlas>("blower/rotate_sponsor.atlas", TextureAtlas.class);
 
 	//Szél
 	public static final AssetDescriptor<TextureAtlas> WIND_TEXTURE
@@ -113,6 +122,7 @@ public class Assets {
 		manager.setLoader(BitmapFont.class, ".otf", new FreetypeFontLoader(resolver));
 
 
+		manager.load(PENLOGO_TEXTURE);
 		manager.load(ARIAL_30_FONT);
 		// TODO: 2018. 02. 02. itt van a háttér loadja
 		//manager.load(BACKGROUND_TEXTURE);
@@ -125,6 +135,8 @@ public class Assets {
 		//Texturák
 		manager.load(PLATFORM1_TEXTURE);
 		manager.load(BACKGROUND_TEXTURE);
+		manager.load(HELP_HAND_TEXTURE);
+		manager.load(WHITE_RECTANGLE_TEXTURE);
 
 
 		//Animált texturák atlaszai

@@ -24,6 +24,7 @@ import com.csanysoft.donto.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class MenuStage extends MyStage {
 
     TextButton btnStart , btnExit;
+    OneSpriteStaticActor penlogo , whiterect;
     OneSpriteStaticActor bg;
     Music menu;
 
@@ -34,6 +35,7 @@ public class MenuStage extends MyStage {
         menu.play();
         menu.setVolume(0.4f);
         menu.setLooping(true);
+
 
     }
 

@@ -32,12 +32,12 @@ public class GameStage extends MyStage {
     PlatformActor platformActor;
     AndroidActor androidActor;
     FanActor fanActor;
+    HelpHandActor helpHand;
     Random rand = new Random();
     OneSpriteStaticActor bg;
     TextButton btnOn;
     int i=0;
     Music sound;
-    Music fan;
 
 
 
@@ -67,7 +67,11 @@ public class GameStage extends MyStage {
             platforms.add(platformActor);
     }
 
+        helpHand.setPosition(0,0);
+        addActor(helpHand);
+        helpHand.setVisible(true);
 
+        bg.setZIndex(1);
         platformActor.setZIndex(3);
         androidActor.setZIndex(2);
         setDebugAll(true);
@@ -88,6 +92,7 @@ public class GameStage extends MyStage {
         });
         addActor(btnOn);
         */
+    setDebugAll(true);
     }
 
     boolean removePlatformFromArrayList = false;
@@ -106,7 +111,12 @@ public class GameStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
 
+        helpHand.setPosition(androidActor.getX(), androidActor.getY());
+        helpHand.setSize(getWidth() + (float)Math.cos(elapsedTime*10)/40, getHeight() + (float)Math.sin(elapsedTime*10)/40);
         fanActor.setX(androidActor.getX());
+
+
+
 
         if(androidActor!=null){
         if(elapsedTime-elapsedTimeForAndroidActor>10){
@@ -120,6 +130,7 @@ public class GameStage extends MyStage {
             if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isTouched()){
                 androidActor.up();
                 fanActor.turnOn();
+                helpHand.setVisible(false);
             } else if(!onPlatform){
                 androidActor.down();
                 fanActor.turnOff();

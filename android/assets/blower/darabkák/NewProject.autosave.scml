@@ -2,7 +2,8 @@
 <spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
     <folder id="0">
         <file id="0" name="house.png" width="406" height="162" pivot_x="0" pivot_y="1"/>
-        <file id="1" name="rotor.png" width="321" height="47" pivot_x="0.492212" pivot_y="0.659574"/>
+        <file id="1" name="rotor.png" width="321" height="47" pivot_x="0.5" pivot_y="0.5"/>
+        <file id="2" name="house_sponsor.png" width="406" height="162" pivot_x="0" pivot_y="1"/>
     </folder>
     <entity id="0" name="entity_000">
         <animation id="0" name="NewAnimation" length="1000" interval="100">
@@ -16,17 +17,17 @@
                     <object_ref id="1" timeline="0" key="0" z_index="1"/>
                 </key>
             </mainline>
-            <timeline id="0" name="house">
+            <timeline id="0" name="house_sponsor">
                 <key id="0" spin="0">
-                    <object folder="0" file="0" x="-200" y="46.258503"/>
+                    <object folder="0" file="2" x="-200" y="64"/>
                 </key>
             </timeline>
             <timeline id="1" name="rotor">
                 <key id="0">
-                    <object folder="0" file="1" x="0.176923" y="3.047597"/>
+                    <object folder="0" file="1" x="0.759259" y="14.425926"/>
                 </key>
                 <key id="1" time="1000">
-                    <object folder="0" file="1" x="0.176923" y="3.047597" angle="0" scale_x="-1"/>
+                    <object folder="0" file="1" x="0.759259" y="14.425926" angle="0" scale_x="-1"/>
                 </key>
             </timeline>
         </animation>
