@@ -12,7 +12,7 @@ import com.csanysoft.donto.MyBaseClasses.Scene2D.OneSpriteAnimatedActor;
 public class FanActor extends OneSpriteAnimatedActor {
     private boolean isRunning = false;
     private Music fanMusic = Assets.manager.get(Assets.FanSound);
-
+    private float time = 3;
 
     public FanActor() {
         super(Assets.manager.get(Assets.BLOWER_TEXTURE));
@@ -20,15 +20,28 @@ public class FanActor extends OneSpriteAnimatedActor {
         setZIndex(5);
     }
 
+    public float getTime() {
+        return time;
+    }
+
     @Override
     public void act(float delta) {
         super.act(delta);
+        System.out.println(time);
+        if(time<0){
+            time += delta;
+            turnOff();
+            return;
+        }
         if(isRunning){
             //fut
+            time -= delta*2;
             setFps(24);
             fanMusic.play();
         }else{
             //áll
+            if(time<3)
+                time += delta;
             setFps(0);
             fanMusic.pause();
         }

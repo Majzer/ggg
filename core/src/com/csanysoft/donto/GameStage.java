@@ -138,8 +138,11 @@ public class GameStage extends MyStage {
             }
             androidActor.setSpeedX(baseSpeed);
             if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isTouched()){
-                androidActor.up();
-                fanActor.turnOn();
+                if(fanActor.getTime()>0)
+                    fanActor.turnOn();
+                if(fanActor.isRunning()){
+                    androidActor.up();
+                }
                 helpHand.setVisible(false);
             } else if(!onPlatform){
                 androidActor.down();
