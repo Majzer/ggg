@@ -9,7 +9,10 @@ import com.csanysoft.donto.MyBaseClasses.Scene2D.OneSpriteAnimatedActor;
 
 public class AndroidActor extends OneSpriteAnimatedActor {
 
-    private int speedX = 4, speedY = 0;
+    private float speedX = 4, speedY = 0, fallingTime = 0;
+    private boolean moveX = true;
+    private int movingState = 0; //0-Séta, 1-Repülés, 2-Zuhanás
+    private final int GRAVITACIOS_GYORSULAS = 10;
 
     public AndroidActor(TextureAtlas textureAtlas) {
         super(textureAtlas);
@@ -19,10 +22,32 @@ public class AndroidActor extends OneSpriteAnimatedActor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        setX(getX() + speedX);
+
+        if(movingState == 2){//Zuhanás
+            fallingTime += delta;
+        }else
+            fallingTime = 0;
+
+        //jobbra menetel
+        if(moveX)
+            setX(getX() + speedX);
+
+        switch (movingState){
+            case 0://Sétálás
+                speedY=0;
+                break;
+            case 1://Repülés
+                speedY=2;
+                break;
+            case 2://Zuhanás
+                speedY= -GRAVITACIOS_GYORSULAS*fallingTime;
+                break;
+        }
+
+        setY(getY()+speedY);
     }
 
-    public int getSpeedX() {
+    public float getSpeedX() {
         return speedX;
     }
 
@@ -31,14 +56,18 @@ public class AndroidActor extends OneSpriteAnimatedActor {
     }
 
     public void up(){
-        setY(getY()+2);
+        movingState = 1;//Repülés
     }
 
     public void down(){
-        setY(getY()-4);
+        movingState = 2; //Zuhanás, TODO: platformra érkezéskor meghívni a land() methódust
     }
 
-    public int getSpeedY() {
+    public void land(){
+        movingState = 0;//Sétálás
+    }
+
+    public float getSpeedY() {
         return speedY;
     }
 
