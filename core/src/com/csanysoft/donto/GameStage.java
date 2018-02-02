@@ -59,7 +59,7 @@ public class GameStage extends MyStage {
         androidActor.setPosition(platformActor.getX(),platformActor.getY()+platformActor.getHeight()+20);
         platformActor.setZIndex(3);
         for(;i < 11; i++) {
-            addActor(platformActor=new PlatformActor(i*1000 + rand.nextInt(500),rand.nextInt(500)+100));
+            addActor(platformActor=new PlatformActor(i*1100 + rand.nextInt(500),rand.nextInt(500)+100));
             platformActor.setZIndex(3);
             platforms.add(platformActor);
     }
@@ -67,14 +67,13 @@ public class GameStage extends MyStage {
 
         platformActor.setZIndex(3);
         androidActor.setZIndex(2);
-
+        setDebugAll(true);
 
         sound.play();
         sound.setVolume(0.4f);
         sound.setLooping(true);
 
 
-        setDebugAll(true);
         /*
 
         btnOn = new MyButton("", game.btnOn());
@@ -86,7 +85,6 @@ public class GameStage extends MyStage {
         });
         addActor(btnOn);
         */
-    setDebugAll(true);
     }
 
     boolean removePlatformFromArrayList = false;
@@ -114,7 +112,6 @@ public class GameStage extends MyStage {
 
 
             androidActor.setSpeedX(baseSpeed);
-            //TODO: Majd megcsinálom szebbé by ifa
             if(Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isTouched()){
                 androidActor.up();
                 fan.play();
@@ -132,10 +129,15 @@ public class GameStage extends MyStage {
             Array<Actor> actors = getActors();
             ArrayList<Actor> deleteActor = new ArrayList<Actor>();
             onPlatform=false;
+
+
+
             for(PlatformActor pa : platforms){
+
+
                 if(pa.getX()<androidActor.getX()-getViewport().getScreenWidth()*2) {
                     deleteActor.add(pa);
-                    addActor(platformActor=new PlatformActor(i*1000 + rand.nextInt(500),rand.nextInt(500)+100));
+                    addActor(platformActor=new PlatformActor(i*1100 + rand.nextInt(500),rand.nextInt(500)+100));
                     removePlatformFromArrayList = true;
                     removablePlatform = pa;
                     i++;
@@ -144,7 +146,8 @@ public class GameStage extends MyStage {
                 if(androidActor.overlaps(ShapeType.Rectangle,pa)){
                     int aY = (int)androidActor.getY();
                     float paYH = pa.getY()+pa.getHeight();
-                    if(aY < paYH && aY+androidActor.getHeight() > pa.getY()+10 && aY < paYH){
+                    System.out.println("androidActor.getSpeedY() = " + androidActor.getSpeedY());
+                    if(aY < paYH && aY+androidActor.getHeight() > pa.getY()+100 && aY+pa.getHeight() < paYH){
                         System.out.println("oldalról");
                         androidActor.setSpeedX(0);
                     }
