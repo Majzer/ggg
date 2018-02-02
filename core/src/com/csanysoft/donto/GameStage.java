@@ -64,7 +64,8 @@ public class GameStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
         if(androidActor!=null){
-            if(Gdx.input.isKeyPressed(Input.Keys.UP) && !tart(platforms, androidActor)){
+            //TODO: Majd megcsinálom szebbé by ifa
+            if(Gdx.input.isKeyPressed(Input.Keys.UP)){
                 androidActor.up();
             } else if(!(androidActor.getY()<100)) androidActor.down();
 
@@ -84,29 +85,8 @@ public class GameStage extends MyStage {
             for (Actor a : deleteActor) {
                 actors.removeValue(a, true);
             }
-            setCameraMoveToXY(androidActor.getX(), androidActor.getY());
+            setCameraMoveToXY(androidActor.getX(), androidActor.getY(), 1.5f);
         }
-
-        //ha túl magasra megy
-        if(androidActor.getY() > 800) {
-            if(rand.nextBoolean()) {
-                androidActor.setPosition(androidActor.getX()-10, androidActor.getY()+10);
-            }else {
-                androidActor.setPosition(androidActor.getX()+10, androidActor.getY()-10);
-            }
-        }
-
     }
-
-
-    public boolean tart(ArrayList<PlatformActor> vmi, Actor a) {
-        boolean t = false;
-        for(Actor b: vmi ) {
-            if(b.getX() == a.getX()) t = true;
-            else t =  false;
-        }
-        return t;
-    }
-
 }
 

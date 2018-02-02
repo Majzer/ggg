@@ -9,7 +9,7 @@ import com.csanysoft.donto.MyBaseClasses.Scene2D.OneSpriteAnimatedActor;
 
 public class AndroidActor extends OneSpriteAnimatedActor {
 
-    private int speed = 4;
+    private int speedX = 4, speedY = 0;
 
     public AndroidActor(TextureAtlas textureAtlas) {
         super(textureAtlas);
@@ -19,11 +19,15 @@ public class AndroidActor extends OneSpriteAnimatedActor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        setX(getX() + speed);
+        setX(getX() + speedX);
     }
 
-    public int getSpeed() {
-        return speed;
+    public int getSpeedX() {
+        return speedX;
+    }
+
+    public void setSpeedX(int speedX) {
+        this.speedX = speedX;
     }
 
     public void up(){
@@ -34,7 +38,12 @@ public class AndroidActor extends OneSpriteAnimatedActor {
         setY(getY()/1.02f);
     }
 
-    public void setSpeed(int speed) {
-        this.speed = speed;
+    public int getSpeedY() {
+        return speedY;
     }
+
+    public void setSpeedY(int speedY) {
+        this.speedY = speedY;
+    }
+
 }
