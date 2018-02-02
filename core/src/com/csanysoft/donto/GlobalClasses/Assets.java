@@ -15,6 +15,8 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 
+import java.util.Random;
+
 
 public class Assets {
 	// https://github.com/libgdx/libgdx/wiki/Managing-your-assets
@@ -50,9 +52,13 @@ public class Assets {
 	public static final AssetDescriptor<Texture> PLATFORM1_TEXTURE
 			= new AssetDescriptor<Texture>("platforms/platform1.png", Texture.class);
 
+	//Animált dolgok
 	//Android bábú
 	public static final AssetDescriptor<TextureAtlas> WALK_TEXTURE
 			= new AssetDescriptor<TextureAtlas>("android/walk.atlas", TextureAtlas.class);
+
+	public static final AssetDescriptor<TextureAtlas> BLOWER_TEXTURE
+			= new AssetDescriptor<TextureAtlas>("blower/rotate.atlas", TextureAtlas.class);
 
 	//Hangok
 	/*
@@ -89,6 +95,7 @@ public class Assets {
 
 		//Animált texturák atlaszai
 		manager.load(WALK_TEXTURE);
+		manager.load(BLOWER_TEXTURE);
 
 
 	}
