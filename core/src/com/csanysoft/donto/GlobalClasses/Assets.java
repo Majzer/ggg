@@ -60,6 +60,9 @@ public class Assets {
 
 	public static final AssetDescriptor<Texture> FLOPPY_TEXTURE
 			= new AssetDescriptor<Texture>("floppy.png", Texture.class);
+
+	public static final AssetDescriptor<Texture> SPONSOR_TEXTURE
+			= new AssetDescriptor<Texture>("sponsor.png", Texture.class);
 	//---------------------------------------------------------------------------------------------------------
 
 	//Animált dolgok
@@ -142,6 +145,7 @@ public class Assets {
 		manager.load(HELP_HAND_TEXTURE);
 		manager.load(WHITE_RECTANGLE_TEXTURE);
 		manager.load(FLOPPY_TEXTURE);
+		manager.load(SPONSOR_TEXTURE);
 
 
 		//Animált texturák atlaszai

@@ -30,7 +30,7 @@ public class AndroidActor extends OneSpriteAnimatedActor {
 
         //jobbra menetel
         if(moveX)
-            setX(getX() + speedX);
+            //setX(getX() + speedX);
 
         switch (movingState){
             case 0://Sétálás

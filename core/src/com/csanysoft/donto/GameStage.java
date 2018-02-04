@@ -6,6 +6,7 @@ import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.audio.Music;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -39,6 +40,7 @@ public class GameStage extends MyStage {
     HelpHandActor helpHand;
     Random rand = new Random();
     OneSpriteStaticActor bg;
+    PowerActor powerActor;
     TextButton btnOn;
     int i=0;
     Music sound;
@@ -56,6 +58,12 @@ public class GameStage extends MyStage {
         addActor(bg);
 
         bg.setZIndex(1);
+
+        powerActor = new PowerActor();
+        powerActor.setPosition(0,0);
+        addActor(powerActor);
+        powerActor.setSize(powerActor.getWidth()/2,powerActor.getHeight()/2);
+        powerActor.setZIndex(7);
 
         sound = Assets.manager.get(Assets.ThemeSound);
         walk = Assets.manager.get(Assets.WalkSound);
@@ -141,6 +149,10 @@ public class GameStage extends MyStage {
         helpHand.setPosition(androidActor.getX()+androidActor.getWidth()/2-40, androidActor.getY()+androidActor.getHeight()/2-35);
 
         if(androidActor!=null){
+
+            powerActor.setPosition(androidActor.getX()-getViewport().getScreenWidth()/2, androidActor.getY());
+            powerActor.setZIndex(7);
+            powerActor.getSprite().setRegion(new TextureRegion(Assets.manager.get(Assets.SPONSOR_TEXTURE),powerActor.getTexture().getWidth()*0.28f,0f,powerActor.getTexture().getWidth()*0.28f,(float)powerActor.getTexture().getHeight()));
         if(elapsedTime-elapsedTimeForAndroidActor>10){
             androidActor.setFps(androidActor.getFps()+1);
             baseSpeed++;
